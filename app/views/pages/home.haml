@@ -1,0 +1,54 @@
+#home-slider.carousel.slide{"data-ride": "carousel"}
+  / Indicators
+  %ol.carousel-indicators
+    - (0..4).each do |i|
+      %li{class: i == 0 ? "active" : "", "data-slide-to": "#{i}", "data-target": "#home-slider"}
+  / Wrapper for slides
+  .carousel-inner{role: "listbox"}
+    - (0..4).each do |i|
+      .item{class: i == 0 ? "active" : ""}
+        %img{src: asset_path("slider/slider-bg-#{i}.jpg")}/
+  / Controls
+  %a.left.carousel-control{"data-slide": "prev", href: "#home-slider", role: "button"}
+    %span.glyphicon.glyphicon-chevron-left{"aria-hidden": "true"}
+    %span.sr-only Previous
+  %a.right.carousel-control{"data-slide": "next", href: "#home-slider", role: "button"}
+    %span.glyphicon.glyphicon-chevron-right{"aria-hidden": "true"}
+    %span.sr-only Next
+
+%section#how-it-works
+  .container
+    .row
+      .div.col-xs-12.text-center
+        %h1 How it works
+        %p Skout and Connect
+    .row
+      .div.col-xs-12.col-md-4.text-center
+        = image_tag "how-it-works-1"
+        %h2 Discover
+        %p
+          %strong Enter your preferences
+          and discover the wide range of venues your city has to offer.
+      .div.col-xs-12.col-md-4.text-center
+        = image_tag 'how-it-works-2'
+        %h2 Connect
+        %p
+          %strong Connect
+          with a local space owner through the site.
+      .div.col-xs-12.col-md-4.text-center
+        = image_tag 'how-it-works-3'
+        %h2 View and Book
+        %p
+          %strong View and Book
+          your event space directly with the space owner.
+%hr
+%section#community-give-back
+  .container
+    .row
+      .div.col-md-4.col-md-offset-4.col-xs-12.text-center
+        %h1 Community Give Back
+        %h2 Every quarter, we donate 10% of proceeds to the community
+        %p
+          We believe in a strong community and through our Community GiveBack Program,
+          we're investing in the people and services that make our neighborhoods so rich.
+          Every quarter, we donate 10% of proceeds from every listing to a featured charity.
