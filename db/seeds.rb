@@ -1,5 +1,11 @@
-User.roles.keys.each do |role|
-  u = User.new(email: "#{role}@example.com", role: role, password: 'password', password_confirmation: 'password')
-  u.skip_confirmation!
-  u.save
-end
+admin = Admin.new(email: "admin@example.com", password: 'password', password_confirmation: 'password')
+admin.skip_confirmation!
+admin.save!
+
+space_owner = SpaceOwner.new(email: "owner@example.com", password: 'password', password_confirmation: 'password')
+space_owner.skip_confirmation!
+space_owner.save!
+
+customer = Customer.new(email: "customer@example.com", password: 'password', password_confirmation: 'password')
+customer.skip_confirmation!
+customer.save!
