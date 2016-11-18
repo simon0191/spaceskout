@@ -13,3 +13,7 @@ html, body {
 .full-height-with-nav {
   height: calc(100% - #{$navbar-height});
 }
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}

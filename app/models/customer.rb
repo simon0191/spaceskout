@@ -23,7 +23,7 @@
 #  first_name             :string
 #  last_name              :string
 #  phone                  :string
-#  business_logo          :string
+#  avatar                 :string
 #
 
 class Customer < User

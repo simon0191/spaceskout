@@ -23,7 +23,7 @@
 #  first_name             :string
 #  last_name              :string
 #  phone                  :string
-#  business_logo          :string
+#  avatar                 :string
 #
 
 class User < ActiveRecord::Base
@@ -32,5 +32,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  mount_uploader :avatar, SpaceOwners::AvatarUploader
+
   has_many :spaces
+
 end

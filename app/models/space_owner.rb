@@ -23,7 +23,7 @@
 #  first_name             :string
 #  last_name              :string
 #  phone                  :string
-#  business_logo          :string
+#  avatar                 :string
 #
 
 class SpaceOwner < User
@@ -32,6 +32,6 @@ class SpaceOwner < User
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :phone, presence: true
-  validates :business_logo, presence: true
+  validates :avatar, presence: true
 
 end
