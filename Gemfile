@@ -49,3 +49,4 @@ end
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'devise', '~> 4.2.0'
 gem 'haml-rails', '~> 0.9'
+gem 'table_print', '~> 1.5.6'
