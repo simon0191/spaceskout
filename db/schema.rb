@@ -11,10 +11,91 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161117234621) do
+ActiveRecord::Schema.define(version: 20161118173736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "active",     default: false
+    t.integer  "state_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "cities", ["state_id"], name: "index_cities_on_state_id", using: :btree
+
+  create_table "space_categories", force: :cascade do |t|
+    t.integer  "category_id"
+    t.integer  "space_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "space_categories", ["category_id"], name: "index_space_categories_on_category_id", using: :btree
+  add_index "space_categories", ["space_id"], name: "index_space_categories_on_space_id", using: :btree
+
+  create_table "spaces", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "classification"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "zip_code"
+    t.string   "phone"
+    t.integer  "capacity"
+    t.decimal  "rating",                    precision: 15, scale: 2, default: 0.0
+    t.boolean  "published",                                          default: false
+    t.datetime "published_until"
+    t.text     "special_note"
+    t.text     "organization_description"
+    t.text     "space_description"
+    t.string   "website"
+    t.integer  "price_hour"
+    t.integer  "price_daily"
+    t.integer  "price_buyout"
+    t.boolean  "wifi",                                               default: false
+    t.boolean  "audio_visual",                                       default: false
+    t.boolean  "projector",                                          default: false
+    t.boolean  "white_board",                                        default: false
+    t.boolean  "table_chair",                                        default: false
+    t.boolean  "parking",                                            default: false
+    t.boolean  "phone_number",                                       default: false
+    t.boolean  "kitchen",                                            default: false
+    t.boolean  "catering",                                           default: false
+    t.integer  "weekdays_avaiability_from"
+    t.integer  "weekdays_avaiability_to"
+    t.integer  "weekend_avaiability_from"
+    t.integer  "weekend_avaiability_to"
+    t.integer  "minimum_number_of_hours"
+    t.boolean  "monday",                                             default: false
+    t.boolean  "tuesday",                                            default: false
+    t.boolean  "wednesday",                                          default: false
+    t.boolean  "thursday",                                           default: false
+    t.boolean  "friday",                                             default: false
+    t.boolean  "saturday",                                           default: false
+    t.boolean  "sunday",                                             default: false
+    t.integer  "user_id"
+    t.integer  "city_id"
+    t.datetime "created_at",                                                         null: false
+    t.datetime "updated_at",                                                         null: false
+  end
+
+  add_index "spaces", ["city_id"], name: "index_spaces_on_city_id", using: :btree
+  add_index "spaces", ["user_id"], name: "index_spaces_on_user_id", using: :btree
+
+  create_table "states", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "active",     default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -39,4 +120,9 @@ ActiveRecord::Schema.define(version: 20161117234621) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "cities", "states"
+  add_foreign_key "space_categories", "categories"
+  add_foreign_key "space_categories", "spaces"
+  add_foreign_key "spaces", "cities"
+  add_foreign_key "spaces", "users"
 end

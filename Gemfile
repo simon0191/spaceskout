@@ -44,6 +44,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'letter_opener', '~> 1.4.1'
+  gem 'annotate', '~> 2.7.1'
 end
 
 gem 'bootstrap-sass', '~> 3.3.6'
