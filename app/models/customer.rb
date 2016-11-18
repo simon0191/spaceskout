@@ -19,6 +19,11 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  type                   :string
+#  business_name          :string
+#  first_name             :string
+#  last_name              :string
+#  phone                  :string
+#  business_logo          :string
 #
 
 class Customer < User

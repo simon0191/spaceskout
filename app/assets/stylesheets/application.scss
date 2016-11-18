@@ -3,4 +3,13 @@
 @import "bootstrap";
 
 @import "pages/home";
+@import "shared/forms";
 @import "shared/navigation";
+@import "space_owners/registrations";
+
+html, body {
+  height: 100%;
+}
+.full-height-with-nav {
+  height: calc(100% - #{$navbar-height});
+}

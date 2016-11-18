@@ -10,3 +10,10 @@
     }
   }
 }
+.ss-navbar-adjust {
+  top: 0;
+  left: 0;
+  content: ' ';
+  height: $navbar-height;
+  width: 100%;
+}

@@ -1,0 +1,14 @@
+[data-controller="space_owners/registrations"]{
+  &[data-action="new"], &[data-action="create"] {
+    section.registration-form {
+      background-image: asset-url('login-bg.jpg');
+      background-repeat-y: no-repeat;
+    }
+    .form-wrapper {
+      background-color: white;
+      padding: 20px 30px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  }
+}

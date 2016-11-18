@@ -1,0 +1,50 @@
+%section.registration-form
+  .container
+    .row
+      .col-xs-12.col-md-4.col-md-offset-4
+        .form-wrapper
+          %h3 Space Owner Registration
+          %hr
+          = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'ss-form'} ) do |f|
+            .form-group{class: error_class(resource, :business_name)}
+              = f.label :business_name, class: 'required'
+              = f.text_field :business_name, class: 'form-control'
+              = render 'shared/forms/error', resource: resource, field: :business_name
+
+            .row
+              .col-xs-6.form-group{class: error_class(resource, :first_name)}
+                = f.label :first_name, class: 'required'
+                = f.text_field :first_name, class: 'form-control'
+                = render 'shared/forms/error', resource: resource, field: :first_name
+
+              .col-xs-6.form-group{class: error_class(resource, :last_name)}
+                = f.label :last_name, class: 'required'
+                = f.text_field :last_name, class: 'form-control'
+                = render 'shared/forms/error', resource: resource, field: :last_name
+
+            .form-group{class: error_class(resource, :phone)}
+              = f.label :phone, class: 'required'
+              = f.telephone_field :phone, class: 'form-control'
+              = render 'shared/forms/error', resource: resource, field: :phone
+
+            .form-group{class: error_class(resource, :email)}
+              = f.label :email, class: 'required'
+              = f.email_field :email, class: 'form-control'
+              = render 'shared/forms/error', resource: resource, field: :email
+
+            .form-group{class: error_class(resource, :password)}
+              = f.label :password, class: 'required'
+              = f.password_field :password, class: 'form-control'
+              = render 'shared/forms/error', resource: resource, field: :password
+
+            .form-group{class: error_class(resource, :business_logo)}
+              = f.label :business_logo, class: 'required'
+              = f.text_field :business_logo, class: 'form-control'
+              = render 'shared/forms/error', resource: resource, field: :business_logo
+
+
+            = f.submit 'REGISTER', class: 'btn btn-primary'
+
+            %p.text-muted
+              Already on Space Skout?
+              = link_to 'login', new_user_session_path

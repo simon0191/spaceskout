@@ -19,6 +19,11 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  type                   :string
+#  business_name          :string
+#  first_name             :string
+#  last_name              :string
+#  phone                  :string
+#  business_logo          :string
 #
 
 class User < ActiveRecord::Base
@@ -26,8 +31,6 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
-
-  enum role: [:customer, :space_owner, :admin]
 
   has_many :spaces
 end

@@ -19,7 +19,19 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  type                   :string
+#  business_name          :string
+#  first_name             :string
+#  last_name              :string
+#  phone                  :string
+#  business_logo          :string
 #
 
 class SpaceOwner < User
+
+  validates :business_name, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :phone, presence: true
+  validates :business_logo, presence: true
+
 end
