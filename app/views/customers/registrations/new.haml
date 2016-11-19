@@ -1,0 +1,34 @@
+%section.registration-form
+  .container
+    .row
+      .col-xs-12.col-md-5.col-centered
+        .form-wrapper
+          %h3 Customer Registration
+          %hr
+          = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'ss-form', multipart: true} ) do |f|
+            .row
+              .col-xs-6.form-group{class: error_class(resource, :first_name)}
+                = f.label :first_name, class: 'required'
+                = f.text_field :first_name, class: 'form-control'
+                = render 'shared/forms/error', resource: resource, field: :first_name
+
+              .col-xs-6.form-group{class: error_class(resource, :last_name)}
+                = f.label :last_name, class: 'required'
+                = f.text_field :last_name, class: 'form-control'
+                = render 'shared/forms/error', resource: resource, field: :last_name
+
+            .form-group{class: error_class(resource, :email)}
+              = f.label :email, class: 'required'
+              = f.email_field :email, class: 'form-control'
+              = render 'shared/forms/error', resource: resource, field: :email
+
+            .form-group{class: error_class(resource, :password)}
+              = f.label :password, class: 'required'
+              = f.password_field :password, class: 'form-control'
+              = render 'shared/forms/error', resource: resource, field: :password
+
+            = f.submit 'REGISTER', class: 'btn btn-primary'
+
+            %p.text-muted
+              Already on Space Skout?
+              = link_to 'login', new_user_session_path

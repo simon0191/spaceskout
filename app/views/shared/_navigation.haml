@@ -1,0 +1,30 @@
+%nav.ss-navbar.navbar.navbar-default.navbar-fixed-top{:role => "navigation"}
+  .container
+    .navbar-header
+      %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to image_tag("logo-beta.png", class: "img-responsive"), root_path, :class => "navbar-brand"
+    #navbar.collapse.navbar-collapse
+      %ul.nav.navbar-nav.navbar-right
+        %li= link_to "Home", root_path
+        %li= link_to "How it Works", root_path(anchor: 'how-it-works')
+        %li= link_to "Our Story", our_story_pages_path
+        - unless space_owner_signed_in?
+          %li= link_to 'Your Space Here', your_space_here_pages_path
+        - if user_signed_in?
+          %li= link_to 'Logout', destroy_user_session_path, method: :delete
+        - else
+          %li= link_to 'Login', new_user_session_path
+          %li.dropdown
+            %a.dropdown-toggle{href: '#', "data-toggle": "dropdown"}
+              Signup
+              %span.caret
+            %ul.dropdown-menu
+              %li= link_to "Space Owner", new_space_owner_registration_path
+              %li= link_to "Customer", new_customer_registration_path
+
+        %li= link_to "Contact Us", contact_us_pages_path
+.ss-navbar-adjust

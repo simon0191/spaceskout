@@ -6,9 +6,11 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
-  resources :pages, only: [] do
+  resources :pages, path: '/', only: [] do
     collection do
-      get :how_it_works
+      get :your_space_here
+      get :our_story
+      get :contact_us
     end
   end
 
