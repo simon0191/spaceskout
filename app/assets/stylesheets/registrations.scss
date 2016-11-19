@@ -1,4 +1,6 @@
-[data-controller="space_owners/registrations"], [data-controller="customers/registrations"]{
+[data-controller="devise/sessions"],
+[data-controller="space_owners/registrations"],
+[data-controller="customers/registrations"] {
   &[data-action="new"], &[data-action="create"] {
     section.registration-form {
       background-image: asset-url('login-bg.jpg');

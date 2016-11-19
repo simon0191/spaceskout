@@ -1,0 +1,32 @@
+%section.registration-form
+  .container
+    .row
+      .col-xs-12.col-md-5.col-centered
+        .form-wrapper
+          %h3 Login
+          %hr
+          = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'ss-form'} ) do |f|
+            .form-group{class: error_class(resource, :email)}
+              = f.label :email, class: 'required'
+              = f.email_field :email, class: 'form-control', autofocus: true
+              = render 'shared/forms/error', resource: resource, field: :email
+
+            .form-group{class: error_class(resource, :password)}
+              = f.label :password, class: 'required'
+              = f.password_field :password, class: 'form-control'
+              = render 'shared/forms/error', resource: resource, field: :password
+            .checkbox
+              = f.label :remember_me do
+                = f.check_box :remember_me
+                Remember me
+
+            = f.submit 'LOGIN', class: 'btn btn-primary'
+
+            %hr
+            %p= link_to "Forgot password?", new_password_path(resource_name)
+            %p= link_to "Didn't receive confirmation instructions?", new_password_path(resource_name)
+            %p.text-muted
+              Register as
+              = link_to 'Customer', new_customer_registration_path
+              Or
+              = link_to 'Space Owner', new_space_owner_registration_path

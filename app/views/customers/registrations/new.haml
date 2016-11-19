@@ -5,7 +5,7 @@
         .form-wrapper
           %h3 Customer Registration
           %hr
-          = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'ss-form', multipart: true} ) do |f|
+          = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'ss-form'} ) do |f|
             .row
               .col-xs-6.form-group{class: error_class(resource, :first_name)}
                 = f.label :first_name, class: 'required'
