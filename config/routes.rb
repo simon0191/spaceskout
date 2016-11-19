@@ -14,4 +14,8 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :dashboard do
+    resources :spaces
+  end
+
 end

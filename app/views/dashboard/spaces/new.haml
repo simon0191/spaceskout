@@ -1,0 +1,177 @@
+.container
+  .row
+    .col-xs-12.col-centered
+      .form-wrapper
+        %h3 List Your Space
+        %hr
+        = form_for([:dashboard, @space], html: {class: 'ss-form'} ) do |f|
+          .form-group.row{class: error_class(@space, :categories)}
+            .col-md-3.text-right-md
+              = f.label :category_ids, 'Type of Space', class: 'required'
+            .col-md-9
+              .row
+                .col-xs-12
+                  - Category.active.each do |category|
+                    .checkbox
+                      %label
+                        - if @space.category_ids.include?(category.id)
+                          = check_box_tag 'space[category_ids][]', category.id, checked: true
+                          = "#{category.name} #{category.description}"
+                        - else
+                          = check_box_tag 'space[category_ids][]', category.id
+                          = "#{category.name} #{category.description}"
+              .row
+                .col-xs-12
+                  = render 'shared/forms/error', resource: @space, field: :categories
+
+          .form-group.row{class: error_class(@space, :classification)}
+            .col-md-3.text-right-md
+              = f.label :classification, 'Space Classification', class: 'required'
+            .col-md-6
+              = f.select :classification, classification_options, {}, class: 'form-control'
+              = render 'shared/forms/error', resource: @space, field: :classification
+
+          .form-group.row{class: error_class(@space, :name)}
+            .col-md-3.text-right-md
+              = f.label :name, 'Space Name', class: 'required'
+            .col-md-6
+              = f.text_field :name, class: 'form-control'
+              = render 'shared/forms/error', resource: @space, field: :name
+
+          .form-group.row{class: error_class(@space, :address1)}
+            .col-md-3.text-right-md
+              = f.label :address1, 'Address', class: 'required'
+            .col-md-6
+              = f.text_field :address1, class: 'form-control'
+              = render 'shared/forms/error', resource: @space, field: :address1
+
+          .form-group.row{class: error_class(@space, :address2)}
+            .col-md-3.text-right-md
+              = f.label :address2, 'Address 2'
+            .col-md-6
+              = f.text_field :address2, class: 'form-control'
+              = render 'shared/forms/error', resource: @space, field: :address2
+
+          .form-group.row{class: error_class(@space, :city)}
+            .col-md-3.text-right-md
+              = f.label :city_id, 'City', class: 'required'
+            .col-md-6
+              = f.select :city_id, grouped_options_for_select(city_options), {}, class: 'form-control'
+              = render 'shared/forms/error', resource: @space, field: :city
+
+          .form-group.row{class: error_class(@space, :zip_code)}
+            .col-md-3.text-right-md
+              = f.label :zip_code, class: 'required'
+            .col-md-6
+              = f.text_field :zip_code, class: 'form-control'
+              = render 'shared/forms/error', resource: @space, field: :zip_code
+
+          .form-group.row{class: error_class(@space, :phone)}
+            .col-md-3.text-right-md
+              = f.label :phone, 'Phone Number', class: 'required'
+            .col-md-6
+              = f.text_field :phone, class: 'form-control'
+              = render 'shared/forms/error', resource: @space, field: :phone
+
+          .form-group.row{class: error_class(@space, :capacity)}
+            .col-md-3.text-right-md
+              = f.label :capacity, 'Capacity', class: 'required'
+            .col-md-6
+              = f.select :capacity, capacity_options, {}, class: 'form-control'
+              = render 'shared/forms/error', resource: @space, field: :capacity
+
+          .form-group.row
+            .col-md-3.text-right-md
+              = f.label :price, 'Price ($)', class: 'required'
+            .col-md-3{class: error_class(@space, :price_hourly)}
+              = f.number_field :price_hourly, class: 'form-control', step: 1, min: 0, placeholder: 'Hourly'
+              = render 'shared/forms/error', resource: @space, field: :price_hourly
+            .col-md-3{class: error_class(@space, :price_daily)}
+              = f.number_field :price_daily, class: 'form-control', step: 1, min: 0, placeholder: 'Daily'
+              = render 'shared/forms/error', resource: @space, field: :price_daily
+            .col-md-3{class: error_class(@space, :price_buyout)}
+              = f.number_field :price_buyout, class: 'form-control', step: 1, min: 0, placeholder: 'Buyout'
+              = render 'shared/forms/error', resource: @space, field: :price_buyout
+
+          .form-group.row{class: error_class(@space, :amenities)}
+            .col-md-3.text-right-md
+              = f.label :amenities, class: 'required'
+            .col-md-9
+              .row
+                - Space.amenities.each_slice(3) do |amenities_group|
+                  .col-md-4
+                    - amenities_group.each do |a|
+                      .checkbox
+                        %label
+                          = f.check_box a, {}
+                          = a.to_s.humanize
+              .row
+                .col-xs-12
+                  = render 'shared/forms/error', resource: @space, field: :amenities
+
+
+          .form-group.row{class: error_class(@space, :availability)}
+            .col-md-3.text-right-md
+              = f.label :availability, class: 'required'
+            .col-md-9
+              .row
+                - Space.days.each_slice(2) do |days_group|
+                  .col-md-3
+                    - days_group.each do |d|
+                      .checkbox
+                        %label
+                          = f.check_box d, {}
+                          = d.to_s.humanize
+              .row
+                .col-xs-12
+                  = render 'shared/forms/error', resource: @space, field: :availability
+
+          .form-group.row{class: error_class(@space, :weekdays_availability_from, :weekdays_availability_to)}
+            .col-md-3.text-right-md
+              = f.label :weekdays_availability, class: 'required'
+            .col-md-3
+              = f.select :weekdays_availability_from, hours_options, {include_blank: 'N/A'}, class: 'form-control'
+              = render 'shared/forms/error', resource: @space, field: :weekdays_availability_from
+            .col-md-3
+              = f.select :weekdays_availability_to, hours_options, {include_blank: 'N/A'}, class: 'form-control'
+              = render 'shared/forms/error', resource: @space, field: :weekdays_availability_to
+
+          .form-group.row{class: error_class(@space, :weekend_availability_from, :weekend_availability_to)}
+            .col-md-3.text-right-md
+              = f.label :weekdend_availability, class: 'required'
+            .col-md-3
+              = f.select :weekend_availability_from, hours_options, {include_blank: 'N/A'}, class: 'form-control'
+              = render 'shared/forms/error', resource: @space, field: :weekend_availability_from
+            .col-md-3
+              = f.select :weekend_availability_to, hours_options, {include_blank: 'N/A'}, class: 'form-control'
+              = render 'shared/forms/error', resource: @space, field: :weekend_availability_to
+
+          .form-group.row{class: error_class(@space, :minimum_number_of_hours)}
+            .col-md-3.text-right-md
+              = f.label :minimum_number_of_hours, class: 'required'
+            .col-md-3
+              = f.select :minimum_number_of_hours, (1..24), {prompt: 'Select minimum # of Hours'}, class: 'form-control'
+              = render 'shared/forms/error', resource: @space, field: :minimum_number_of_hours
+
+          .form-group.row{class: error_class(@space, :special_note)}
+            .col-md-3.text-right-md
+              = f.label :special_note, 'Restrictions/Special Notes'
+            .col-md-6
+              = f.text_area :special_note, class: 'form-control'
+              = render 'shared/forms/error', resource: @space, field: :special_note
+
+          .form-group.row{class: error_class(@space, :website)}
+            .col-md-3.text-right-md
+              = f.label :website
+            .col-md-6
+              = f.text_field :website, class: 'form-control'
+              = render 'shared/forms/error', resource: @space, field: :website
+
+          .form-group.row{class: error_class(@space, :description)}
+            .col-md-3.text-right-md
+              = f.label :description, 'Space Description', class: 'required'
+            .col-md-6
+              = f.text_area :description, class: 'form-control'
+              = render 'shared/forms/error', resource: @space, field: :description
+          .text-right
+            = f.submit 'ADD SPACE', class: 'btn btn-info'

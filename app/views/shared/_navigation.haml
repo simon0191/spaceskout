@@ -12,8 +12,10 @@
         %li= link_to "Home", root_path
         %li= link_to "How it Works", root_path(anchor: 'how-it-works')
         %li= link_to "Our Story", our_story_pages_path
-        - unless space_owner_signed_in?
+        - unless user_signed_in? && current_user.has_access_level?(:space_owner)
           %li= link_to 'Your Space Here', your_space_here_pages_path
+        - if user_signed_in? && current_user.has_access_level?(:space_owner)
+          %li= link_to 'List Your Space', new_dashboard_space_path
         - if user_signed_in?
           %li= link_to 'Logout', destroy_user_session_path, method: :delete
         - else

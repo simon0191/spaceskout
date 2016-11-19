@@ -36,4 +36,7 @@ class User < ActiveRecord::Base
 
   has_many :spaces
 
+  def has_access_level?(role)
+    [:customer].include?(role.to_sym)
+  end
 end

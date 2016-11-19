@@ -34,4 +34,7 @@ class SpaceOwner < User
   validates :phone, presence: true
   validates :avatar, presence: true
 
+  def has_access_level?(role)
+    [:customer, :space_owner].include?(role.to_sym)
+  end
 end

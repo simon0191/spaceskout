@@ -6,3 +6,22 @@ form.ss-form {
     }
   }
 }
+
+.form-wrapper {
+  h3 {
+    color: #999;
+  }
+  background-color: white;
+  padding: 20px 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #cccccc;
+  box-shadow: 0 0 5px rgba(0,0,0,0.13);
+  input[type="submit"] {
+    margin-top: 30px;
+  }
+  label {
+    color: #333;
+    font-weight: normal;
+  }
+}

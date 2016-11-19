@@ -13,4 +13,6 @@
 class City < ActiveRecord::Base
   belongs_to :state
   has_many :spaces
+
+  scope :active, -> { joins(:state).where(active: true, 'states.active': true) }
 end

@@ -27,4 +27,9 @@
 #
 
 class Admin < User
+
+  def has_access_level?(role)
+    true
+  end
+
 end
