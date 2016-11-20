@@ -52,6 +52,9 @@ class Space < ActiveRecord::Base
   belongs_to :city
   has_many :space_categories
   has_many :categories, through: :space_categories
+  has_many :space_pictures, dependent: :destroy
+
+  accepts_nested_attributes_for :space_pictures, allow_destroy: true
 
   enum capacity: [:less_50, :between_50_100, :between_100_200, :between_200_500, :between_500_1000, :more_1000]
   enum classification: [:restaurant, :meeting_room, :hotel, :conference_center, :outdoor, :gallery, :studio, :museum, :theater]
@@ -68,6 +71,7 @@ class Space < ActiveRecord::Base
   validates :price_buyout, presence: true
   validates :minimum_number_of_hours, presence: true
   validates :description, presence: true
+  validates :space_pictures, length: {minimum: 3, message: "upload at least 3 pictures"}
 
   validate :validate_at_leat_1_category
   validate :validate_at_least_1_amenities
@@ -100,4 +104,5 @@ class Space < ActiveRecord::Base
         errors.add(:categories, 'select at least one Category')
       end
     end
+
 end

@@ -4,7 +4,7 @@ class Dashboard::SpacesController < Dashboard::BaseController
   end
 
   def new
-    @space = Space.new
+    @space = Space.new(space_pictures: 3.times.map{ SpacePicture.new })
   end
 
   def create
@@ -12,6 +12,9 @@ class Dashboard::SpacesController < Dashboard::BaseController
     if @space.save
       redirect_to dashboard_spaces_path, notice: 'Space has been created successfully'
     else
+      if @space.space_pictures.length < 3
+        3.times{ @space.space_pictures.build }
+      end
       render :new
     end
   end
@@ -31,7 +34,9 @@ class Dashboard::SpacesController < Dashboard::BaseController
         # Location
         :city_id, :address1, :address2, :zip_code,
         # General info
-        :name, :classification, :phone, :capacity, :special_note, :description, :website, category_ids: []
+        :name, :classification, :phone, :capacity, :special_note, :description, :website, category_ids: [],
+        # Pictures
+        space_pictures_attributes: [:image, :image_cache, :_destroy, :id]
       )
     end
 end

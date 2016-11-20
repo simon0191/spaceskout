@@ -129,6 +129,10 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.9.1)
     multi_json (1.12.1)
+    nested_form_fields (0.8)
+      coffee-rails (>= 3.2.1)
+      jquery-rails
+      rails (>= 3.2.0)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
@@ -179,6 +183,9 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     sexp_processor (4.7.0)
+    simple_form (3.3.1)
+      actionpack (> 4, < 5.1)
+      activemodel (> 4, < 5.1)
     spring (2.0.0)
       activesupport (>= 4.2)
     sprockets (3.7.0)
@@ -222,11 +229,13 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   letter_opener (~> 1.4.1)
+  nested_form_fields (~> 0.8)
   pg (~> 0.15)
   rails (= 4.2.7)
   rmagick (~> 2.16.0)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  simple_form (~> 3.3.1)
   spring
   table_print (~> 1.5.6)
   turbolinks
