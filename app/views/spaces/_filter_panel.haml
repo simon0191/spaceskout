@@ -1,0 +1,9 @@
+- id = name.downcase.gsub(/[^\w\s]/,'').split.join('-')
+.panel.panel-default
+  .panel-heading
+    %a{:href => "##{id}", "data-toggle" => "collapse"}
+      %h4.panel-title
+        = name
+  .panel-collapse.collapse.in{id: id}
+    .panel-body
+      = yield

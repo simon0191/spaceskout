@@ -1,9 +1,11 @@
 @import "bootstrap-sprockets";
 @import "theme";
 @import "bootstrap";
+@import "bootstrap-slider";
 
 @import "pages/home";
 @import "registrations";
+@import "spaces/index";
 @import "shared/forms";
 @import "shared/navigation";
 

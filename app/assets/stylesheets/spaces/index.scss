@@ -1,0 +1,9 @@
+[data-controller="spaces"][data-action="index"] {
+  .result-count-container {
+    background-color: $brand-primary;
+    color: white;
+    height: 80px;
+    padding: 20px;
+    text-align: center
+  }
+}
