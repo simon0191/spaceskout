@@ -8,4 +8,8 @@ class PagesController < ApplicationController
 
   def our_story
   end
+
+  def community_giveback
+    @charity = Charity.featured.first
+  end
 end

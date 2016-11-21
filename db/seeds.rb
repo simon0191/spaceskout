@@ -29,3 +29,10 @@ california = State.create!(name: 'California', active: true)
 "Vallejo"	,"Visalia"	,"Walnut Creek","Watsonville","Woodland","Yuba City"].each do |city|
   City.create!(name: city, state: california, active: true)
 end
+
+Charity.create(
+  name: "BOSS",
+  description: "<p style=\"text-align:center\"><strong>The mission of Building Opportunities for Self-Sufficiency (BOSS) is to help homeless, poor, and disabled people achieve health and self-sufficiency. </strong></p><p>Founded in 1971, BOSS operates Housing, Health, Income, and Social Justice programs in the cities of Berkeley, Oakland, and Hayward that serve over 3,000 people a year, both families and single adults. The people BOSS works with are facing multiple challenges - from deep poverty, homelessness and former incarceration to mental illness, substance abuse, domestic violence and more. BOSS works with each person to help them understand the root cause of their situation and develop a goal plan for step by step progress towards achieving housing, income, stability and wellness.</p><br/><p>BOSS believes that every one of us, no matter what our situation or life experiences, can transform our lives and futures -- with the right kind of support and resources. </p><p>Learn more at <a href=\"www.self-sufficiency.org\">www.self-sufficiency.org!</a></p>",
+  remote_logo_url: "https://s3-us-west-2.amazonaws.com/spaceskout/BOSS.Logo.040416.withtagline.WEB.jpg",
+  featured: true
+)

@@ -1,1 +1,43 @@
-%h1 Community Give Back
+.container
+  .row
+    .col-md-8.col-md-offset-2
+      %h2
+        Community GiveBack 
+      %p
+        We believe that giving back to the community is not a choice, but our call of duty. At
+        SpaceSkout, we support a stronger community because well, with that kind of mindset everyone
+        wins. We believe that giving is an important part of building a better future. As we root ourselves
+        in the fabric of the community, it’s important to understand what makes it so special. The people
+        at its core, coming from all walks of life, are an invaluable asset that make our neighborhoods
+        unique, and our nation diverse.
+      %p
+        Through our Community Giveback program, we're investing in the people and services that
+        make our neighborhoods so rich, putting the community first.
+      %p
+        %strong
+          Every quarter, we donate 10% of proceeds collected from every listing to a featured charity.
+      - if @charity.present?
+        %hr/
+        %p
+          %strong
+            This quarter's featured charity:
+        %h2
+          = @charity.name
+        %div
+          = @charity.description.html_safe
+        = image_tag(@charity.logo_url) if @charity.logo?
+
+      %hr/
+      %p
+        %strong
+          Interested in becoming our featured charity?
+      %p
+        We are looking for non-profit organizations whose tireless work is impacting change. If you’re interested in becoming a featured charity, please email us at
+        %a{:href => "mailto:info@spaceskout.com?Subject=", :target => "_top"} info@spaceskout.com
+        with more information about your organization.
+=#  .row
+=#    .col-md-6.col-md-offset-3
+=#      %hr/
+=#      %p Support #{@charity.name}:
+=#      %small 100% of proceeds go directly to #{@charity.name}. All donations are tax deductible.
+=#      =# render partial: "donations/partials/form"
