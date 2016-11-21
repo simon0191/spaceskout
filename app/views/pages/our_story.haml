@@ -1,1 +1,25 @@
-%h1 Our Story
+.container-fluid
+  .row
+    .col-xs-12
+      = image_tag("our-story.jpg", class: "img-responsive")
+.container
+  .row
+    .col-md-offset-2.col-md-8
+      %h2.text-center Our Story
+      %p Finding the right space takes a lot of research. Be it for your next off-site meeting or a baby shower for a friend, every detail has to come together for the perfect fit. We know your job is tough, we’ve been there.
+
+      %p After struggling to find a platform to source unique spaces in the Bay area, we decided to create a common place for everyone to easily connect.
+
+      %h2
+        We’ve designed SpaceSkout with you in mind - simple, easy access to your hidden neighborhood gems.
+
+      %p Each venue is approved and verified by our team so you can rest assured that each location is up to SpaceSkout standards. You can search for your Space, learn what each location has to offer, and message the Space Owner directly once you find a place that suits your needs.
+
+      %p
+        Not only do we want to make your life easier, but we want to make it better. We believe in a strong community and we are acting on that belief by contributing part of the proceeds from every listing to a
+
+        %strong
+          = link_to "featured charity.", community_giveback_pages_path
+
+      %p Come join us in our efforts to connect the communities we live in.
+
