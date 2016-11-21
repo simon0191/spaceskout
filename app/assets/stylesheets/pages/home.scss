@@ -6,4 +6,41 @@
       width: 100%;
     }
   }
+  .discover-btn-container {
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    width: 100%;
+    .btn-discover {
+      padding: 15px 30px;
+      font-size: 24px;
+      @media(max-width: $screen-xs-max) {
+        padding: 10px 25px;
+        font-size: 20px;
+      }
+    }
+    @media(max-width: $screen-xs-max) {
+      top: 20%;
+    }
+  }
+  .search-space-form-container {
+    background-color: white;
+    width: 90%;
+    float: none;
+    margin: 0 auto;
+    min-height: 145px;
+    position: relative;
+    bottom: 80px;
+    padding: 50px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    @media(max-width: $screen-xs-max) {
+      margin-top: 20px;
+    }
+    label {
+      margin-top: 5px;
+    }
+    select {
+      margin-bottom: 5px;
+    }
+  }
 }

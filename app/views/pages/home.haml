@@ -16,6 +16,12 @@
     %span.glyphicon.glyphicon-chevron-right{"aria-hidden": "true"}
     %span.sr-only Next
 
+.discover-btn-container
+  = link_to 'Discover your space', spaces_path, class: 'btn btn-success btn-discover'
+
+.search-space-form-container
+  = render 'pages/search_spaces_form'
+
 %section#how-it-works
   .container
     .row

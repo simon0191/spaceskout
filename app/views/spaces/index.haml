@@ -1,0 +1,9 @@
+.container
+  .row
+    .col-xs-12
+      %h1 Spaces
+
+      %ul
+        - @spaces.each do |space|
+          %li= space.name
+      = paginate @spaces

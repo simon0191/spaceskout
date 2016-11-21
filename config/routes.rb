@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :spaces, only: [:index]
+
   namespace :dashboard do
     resources :spaces
   end

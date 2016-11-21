@@ -78,11 +78,11 @@ class Space < ActiveRecord::Base
   validate :validate_at_least_1_day
 
   def self.amenities
-    [:wifi, :audio_visual, :projector, :white_board, :table_chair, :parking, :phone_number, :kitchen, :catering]
+    @amenities ||= [:wifi, :audio_visual, :projector, :white_board, :table_chair, :parking, :phone_number, :kitchen, :catering]
   end
 
   def self.days
-    [:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday]
+    @days ||= [:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday]
   end
 
   private

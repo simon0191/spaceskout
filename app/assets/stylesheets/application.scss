@@ -17,8 +17,20 @@ html, body {
   float: none;
   margin: 0 auto;
 }
+
+.text-right-xs {
+  @media (min-width: $screen-xs) {
+    text-align: right;
+  }
+}
+
 .text-right-md {
   @media (min-width: $screen-md) {
     text-align: right;
   }
+}
+
+
+.btn-secondary {
+  @include button-variant(white, #F9622F, #d75124);
 }

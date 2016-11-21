@@ -1,0 +1,21 @@
+= form_tag spaces_path, method: :get do
+  .row
+    .col-md-10
+      .row
+        .form-group.col-md-6
+          .row
+            .col-md-3.text-right-md
+              = label_tag :city_id, 'Location'
+            .col-md-9.text-left
+              = select_tag :city_id, grouped_options_for_select(city_options, params[:city_id]), class: 'form-control', prompt: 'Select a city'
+              %small.text-muted
+                %span.text-danger *
+                Only serving cities in Northern California
+        .form-group.col-md-6
+          .row
+            .col-md-3.text-right-md
+              = label_tag :category, 'Event Type'
+            .col-md-9.text-left
+              = select_tag 'space_categories[]', options_for_select(category_options, params[:space_categories].try(:first)), class: 'form-control', prompt: 'Select event type'
+    .col-md-2.text-right-xs
+      = submit_tag 'SEARCH', class: 'btn btn-secondary'

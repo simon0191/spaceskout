@@ -31,4 +31,8 @@ module ApplicationHelper
     date = DateTime.current.beginning_of_day
     (0..23).map{ |h| [date.change(hour: h).strftime('%l:00 %p'), h] }
   end
+
+  def category_options
+    Category.active.map { |c| [c.name, c.id] }
+  end
 end
