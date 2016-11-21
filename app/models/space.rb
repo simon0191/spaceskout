@@ -50,8 +50,9 @@
 class Space < ActiveRecord::Base
   belongs_to :user
   belongs_to :city
-  has_many :space_categories
   has_many :categories, through: :space_categories
+  has_many :ratings
+  has_many :space_categories
   has_many :space_pictures, dependent: :destroy
 
   accepts_nested_attributes_for :space_pictures, allow_destroy: true
@@ -83,6 +84,10 @@ class Space < ActiveRecord::Base
 
   def self.days
     @days ||= [:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday]
+  end
+
+  def main_picture
+    space_pictures.first.try(:image)
   end
 
   private

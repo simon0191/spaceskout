@@ -1,0 +1,20 @@
+.results-container
+  .row
+    - spaces.each do |space|
+      .col-md-4.p5
+        .space-card
+          .space-picture
+            %img{class: 'text-center img-responsive', src: space.main_picture.try(:croped).try(:url)}
+          .space-info
+            .space-other-info.pull-right
+              %img{class: 'text-center img-responsive rating', src: asset_url("rating-#{space.rating.floor}.png")}
+              = "#{pluralize(space.ratings.count,'Review')}"
+              %p
+                %span.price
+                  = "$#{space.price_hourly}"
+                \/hr
+            .space-general-info.pull-left
+              %p= "#{space.name} / #{space.city.try(:name)}"
+              %p= "(#{space.classification.to_s.humanize})"
+  .row
+    = paginate spaces

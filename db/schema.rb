@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161119234240) do
+ActiveRecord::Schema.define(version: 20161121222344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,17 @@ ActiveRecord::Schema.define(version: 20161119234240) do
   end
 
   add_index "cities", ["state_id"], name: "index_cities_on_state_id", using: :btree
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer  "stars",      default: 0
+    t.integer  "space_id"
+    t.integer  "user_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "ratings", ["space_id"], name: "index_ratings_on_space_id", using: :btree
+  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
 
   create_table "space_categories", force: :cascade do |t|
     t.integer  "category_id"
@@ -138,6 +149,8 @@ ActiveRecord::Schema.define(version: 20161119234240) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "cities", "states"
+  add_foreign_key "ratings", "spaces"
+  add_foreign_key "ratings", "users"
   add_foreign_key "space_categories", "categories"
   add_foreign_key "space_categories", "spaces"
   add_foreign_key "space_pictures", "spaces"
