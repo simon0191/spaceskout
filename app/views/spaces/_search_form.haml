@@ -1,66 +1,67 @@
 .result-count-container
   %h4
     = "#{pluralize(@spaces.count,'Space')} found"
-= form_tag(spaces_path, method: :get) do
-  .form-group
-    = label_tag :classification
-    = select_tag :classification,
-                options_for_select(classification_options, search_form.classification),
-                {prompt: 'Select Classification', class: 'form-control'}
-  .form-group
-    = label_tag :city
-    = select_tag :city_id,
-                grouped_options_for_select(city_options, search_form.city_id),
-                {prompt: 'Select City', class: 'form-control'}
+.advanced-search-form-container
+  = form_tag(spaces_path, method: :get) do
+    .form-group
+      = label_tag :classification
+      = select_tag :classification,
+                  options_for_select(classification_options, search_form.classification),
+                  {prompt: 'Select Classification', class: 'form-control'}
+    .form-group
+      = label_tag :city
+      = select_tag :city_id,
+                  grouped_options_for_select(city_options, search_form.city_id),
+                  {prompt: 'Select City', class: 'form-control'}
 
-  = submit_tag "Search" , class: "btn btn-secondary"
+    = submit_tag "Search" , class: "btn btn-secondary"
 
-  %h3 Filter by
-  %hr/
+    %h3 Filter by
+    %hr/
 
-  = render(layout: 'filter_panel', locals: {name: 'Star Rating'}) do
-    - (0..5).reverse_each do |rating|
-      .checkbox
-        %label
-          %input{name: "ratings[]", type: "checkbox", value: "#{rating}",
-                checked: search_form.ratings && search_form.ratings.include?(rating.to_s) }
-          = image_tag("rating-#{rating}.png")
-          #{rating} Stars
+    = render(layout: 'filter_panel', locals: {name: 'Star Rating'}) do
+      - (0..5).reverse_each do |rating|
+        .checkbox
+          %label
+            %input{name: "ratings[]", type: "checkbox", value: "#{rating}",
+                  checked: search_form.ratings && search_form.ratings.include?(rating.to_s) }
+            = image_tag("rating-#{rating}.png")
+            #{rating} Stars
 
-  = render(layout: 'filter_panel', locals: {name: 'Hourly price range($)'}) do
-    %input{id: "hourly-price", type: "text", value: "", name: 'price_hourly_range',
-          "data-slider-step": 5,
-          "data-slider-ticks": [0, 1000],
-          "data-slider-ticks-labels": ["$0", "$1000"],
-          "data-slider-value": search_form.formatted_price_hourly_range || [0,1000]}
+    = render(layout: 'filter_panel', locals: {name: 'Hourly price range ($)'}) do
+      %input{id: "hourly-price", type: "text", value: "", name: 'price_hourly_range',
+            "data-slider-step": 5,
+            "data-slider-ticks": [0, 1000],
+            "data-slider-ticks-labels": ["$0", "$1000"],
+            "data-slider-value": search_form.formatted_price_hourly_range || [0,1000]}
 
-  = render(layout: 'filter_panel', locals: {name: 'Space Type'}) do
-    - Category.active.each do |category|
-      .checkbox
-        %label
-          %input{name: "categories[]", type: "checkbox", value: "#{category.id}",
-                checked: search_form.categories && search_form.categories.include?(category.id.to_s)}
-          = category.name
+    = render(layout: 'filter_panel', locals: {name: 'Space Type'}) do
+      - Category.active.each do |category|
+        .checkbox
+          %label
+            %input{name: "categories[]", type: "checkbox", value: "#{category.id}",
+                  checked: search_form.categories && search_form.categories.include?(category.id.to_s)}
+            = category.name
 
-  = render(layout: 'filter_panel', locals: {name: 'Amenities'}) do
-    - Space.amenities.each do |a|
-      .checkbox
-        %label
-          %input{name: "amenities[]", type: "checkbox", value: a,
-                checked: search_form.amenities && search_form.amenities.include?(a.to_s)}
-          = a.to_s.humanize
+    = render(layout: 'filter_panel', locals: {name: 'Amenities'}) do
+      - Space.amenities.each do |a|
+        .checkbox
+          %label
+            %input{name: "amenities[]", type: "checkbox", value: a,
+                  checked: search_form.amenities && search_form.amenities.include?(a.to_s)}
+            = a.to_s.humanize
 
-  = render(layout: 'filter_panel', locals: {name: 'Availability'}) do
-    - Space.days.each do |day|
-      .checkbox
-        %label
-          %input{name: "availabilities[]", type: "checkbox", value: day,
-                checked: search_form.availabilities && search_form.availabilities.include?(day.to_s)}
-          = day.to_s.humanize
+    = render(layout: 'filter_panel', locals: {name: 'Availability'}) do
+      - Space.days.each do |day|
+        .checkbox
+          %label
+            %input{name: "availabilities[]", type: "checkbox", value: day,
+                  checked: search_form.availabilities && search_form.availabilities.include?(day.to_s)}
+            = day.to_s.humanize
 
-  = submit_tag "Search" , class: "btn btn-secondary"
+    = submit_tag "Search" , class: "btn btn-secondary"
 
-:javascript
-  $(document).ready(function() {
-    $('#hourly-price').slider({});
-  });
+  :javascript
+    $(document).ready(function() {
+      $('#hourly-price').slider({});
+    });

@@ -11,6 +11,9 @@ Rails.application.routes.draw do
       get :your_space_here
       get :our_story
       get :contact_us
+      get :privacy
+      get :faqs
+      get :community_giveback
     end
   end
 

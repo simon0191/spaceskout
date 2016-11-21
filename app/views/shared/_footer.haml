@@ -1,0 +1,48 @@
+%footer
+  .container
+    .row
+      .col-md-3
+        %h4 Let's Socialize
+
+        %img{src: asset_url('icon-facebook.png'), href: 'https://www.facebook.com/spaceskout/'}/
+        %br/
+        © 2016 |
+        %a{:href => privacy_pages_path} Privacy Policy
+        %br/
+        All Rights Reserved
+      .col-md-3
+        %h4 Company
+        %ul.footer-list
+          %li
+            %a{:href => root_path} Home
+          %li
+            %a{:href => root_path(anchor: 'how-it-works')} How It Works
+          %li
+            %a{:href => your_space_here_pages_path} Your Space Here
+          %li
+            %a{:href => our_story_pages_path} Our Story
+          %li
+            %a{:href => faqs_pages_path} FAQs
+          %li
+            %a{:href => community_giveback_pages_path} Community GiveBack
+          %li
+            %a{:href => contact_us_pages_path} Contact Us
+      .col-md-3
+        %h4 Users
+        %ul.footer-list
+          - if user_signed_in?
+            %li
+              = link_to "Logout", destroy_user_session_path
+          - else
+            %li
+              %a{:href => new_user_session_path} Login
+          %li
+            %a{:href => new_customer_registration_path} Customer Registration
+          %li
+            %a{:href => new_space_owner_registration_path} Space Owner Registration
+
+      .col-md-3
+        %h4 Customer support
+        = mail_to('info@spaceskout.com')
+        %br/
+        = link_to 'DONATE NOW', community_giveback_pages_path, class: 'btn btn-success'
