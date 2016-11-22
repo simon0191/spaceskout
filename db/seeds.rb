@@ -2,7 +2,11 @@ admin = Admin.new(email: "admin@example.com", password: 'password', password_con
 admin.skip_confirmation!
 admin.save!
 
-space_owner = SpaceOwner.new(email: "owner@example.com", password: 'password', password_confirmation: 'password')
+space_owner = SpaceOwner.new(
+  email: "owner@example.com", password: 'password', password_confirmation: 'password',
+  business_name: 'The Owners', first_name: 'John', last_name: 'Doe', phone: '12345678',
+  remote_avatar_url: 'http://evmprint.be/wp-content/uploads/2014/08/team3.jpg'
+)
 space_owner.skip_confirmation!
 space_owner.save!
 
