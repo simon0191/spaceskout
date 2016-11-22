@@ -90,6 +90,10 @@ class Space < ActiveRecord::Base
     space_pictures.first.try(:image)
   end
 
+  def address
+    [address1, address2].reject(&:blank?).join(', ')
+  end
+
   private
 
     def validate_at_least_1_amenities

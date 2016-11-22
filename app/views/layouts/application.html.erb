@@ -9,6 +9,7 @@
 </head>
 <body data-controller="<%= params[:controller] %>" data-action="<%= params[:action] %>">
   <%= render 'shared/navigation' %>
+  <%= render 'shared/alerts' %>
   <%= yield %>
   <%= render 'shared/footer' %>
 

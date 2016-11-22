@@ -1,0 +1,6 @@
+.main-alerts-container {
+  position: absolute;
+  width: 100%;
+  top: $navbar-height + 5px;
+  z-index: $zindex-tooltip;
+}

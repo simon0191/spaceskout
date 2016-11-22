@@ -15,6 +15,7 @@
         - unless user_signed_in? && current_user.has_access_level?(:space_owner)
           %li= link_to 'Your Space Here', your_space_here_pages_path
         - if user_signed_in? && current_user.has_access_level?(:space_owner)
+          %li= link_to 'Profile', dashboard_root_path
           %li= link_to 'List Your Space', new_dashboard_space_path
         - if user_signed_in?
           %li= link_to 'Logout', destroy_user_session_path, method: :delete

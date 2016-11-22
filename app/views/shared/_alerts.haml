@@ -1,0 +1,13 @@
+- if flash[:notice] || flash[:error]
+  .main-alerts-container
+    .container
+      - if flash[:notice]
+        .alert.alert-success.alert-dismissible.fade.in
+          %button.close{type: 'button', 'data-dismiss':'alert'}
+            %span x
+          = flash[:notice]
+      - if flash[:error]
+        .alert.alert-danger.alert-dismissible.fade.in
+          %button.close{type: 'button', 'data-dismiss':'alert'}
+            %span x
+          = flash[:notice]

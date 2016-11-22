@@ -1,6 +1,7 @@
 class Dashboard::SpacesController < Dashboard::BaseController
 
   def index
+    @spaces = current_user.spaces
   end
 
   def new

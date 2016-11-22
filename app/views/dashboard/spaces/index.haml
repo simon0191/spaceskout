@@ -1,1 +1,22 @@
-%h1 Your Spaces
+.container
+  .row
+    .col-xs-12
+      %h1 Your Spaces
+
+      .table-responsive
+        %table.table
+          %thead
+            %tr
+              %th Name
+              %th Classification
+              %th Address
+              %th Hourly Price
+              %th Rating
+          %tbody
+            - @spaces.each do |space|
+              %tr
+                %td= space.name
+                %td= space.classification.to_s.humanize
+                %td= space.address
+                %td= number_to_currency(space.price_hourly)
+                %td= space.rating
