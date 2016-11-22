@@ -47,6 +47,10 @@ group :development do
   gem 'annotate', '~> 2.7.1'
 end
 
+group :production do
+  gem 'rails_12factor'
+end
+
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'devise', '~> 4.2.0'
 gem 'haml-rails', '~> 0.9'
