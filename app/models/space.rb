@@ -83,7 +83,15 @@ class Space < ActiveRecord::Base
   end
 
   def self.days
-    @days ||= [:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday]
+    @days ||= week_days + weekend_days
+  end
+
+  def self.week_days
+    @weekdays ||=  [:monday, :tuesday, :wednesday, :thursday, :friday]
+  end
+
+  def self.weekend_days
+    @weekdays ||=  [:saturday, :sunday]
   end
 
   def main_picture
@@ -92,6 +100,23 @@ class Space < ActiveRecord::Base
 
   def address
     [address1, address2].reject(&:blank?).join(', ')
+  end
+
+  def formatted_availabilities
+    result = {}
+    self.class.week_days.reduce(result) do |r, day|
+      if self.send("#{day}?")
+        r[day.capitalize] = "#{num_to_hour(weekdays_availability_from)} - #{num_to_hour(weekdays_availability_to)}"
+      end
+      r
+    end
+    self.class.weekend_days.reduce(result) do |r, day|
+      if self.send("#{day}?")
+        r[day.capitalize] = "#{num_to_hour(weekend_availability_from)} - #{num_to_hour(weekend_availability_to)}"
+      end
+      r
+    end
+    result
   end
 
   private
@@ -112,6 +137,11 @@ class Space < ActiveRecord::Base
       unless categories.any?
         errors.add(:categories, 'select at least one Category')
       end
+    end
+
+    def num_to_hour(n)
+      date = DateTime.current.beginning_of_day
+      "#{date.change(hour: n).strftime('%l:00 %p')}"
     end
 
 end

@@ -7,6 +7,7 @@
 @import "pages/home";
 @import "registrations";
 @import "spaces/index";
+@import "spaces/show";
 @import "shared/alerts";
 @import "shared/forms";
 @import "shared/navigation";
@@ -14,9 +15,11 @@
 html, body {
   height: 100%;
 }
+
 .full-height-with-nav {
   height: calc(100% - #{$navbar-height});
 }
+
 .col-centered {
   float: none;
   margin: 0 auto;
@@ -33,11 +36,21 @@ html, body {
     text-align: right;
   }
 }
-@each $size in (0, 2, 5, 10, 15, 20) {
+
+@each $size in (0, 2, 5, 10, 15, 20, 25, 30, 40, 50) {
   .p#{$size} {
     padding: #{$size}px;
   }
+  .m#{$size} {
+    margin: #{$size}px;
+  }
 }
+
 .btn-secondary {
   @include button-variant(white, #F9622F, #d75124);
+}
+
+.shadow-border {
+  border: 1px solid #cccccc;
+  box-shadow: 0 0 5px rgba(0,0,0,0.13);
 }

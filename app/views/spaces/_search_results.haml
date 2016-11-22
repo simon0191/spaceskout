@@ -14,7 +14,7 @@
                   = "$#{space.price_hourly}"
                 \/hr
             .space-general-info.pull-left
-              %p= "#{space.name} / #{space.city.try(:name)}"
+              = link_to("#{space.name} / #{space.city.try(:name)}", space_path(space.id) )
               %p= "(#{space.classification.to_s.humanize})"
   .row
     = paginate spaces

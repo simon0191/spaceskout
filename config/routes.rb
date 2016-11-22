@@ -17,11 +17,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :spaces, only: [:index]
+  resources :spaces, only: [:index, :show]
 
   namespace :dashboard do
     get '/', to: redirect('/dashboard/spaces'), as: :root
-    resources :spaces
+    resources :spaces, only: [:index, :new, :create]
   end
 
 end

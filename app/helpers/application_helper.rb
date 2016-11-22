@@ -17,14 +17,7 @@ module ApplicationHelper
   end
 
   def capacity_options
-    [
-      ['< 50', :less_50],
-      ['50-100', :between_50_100],
-      ['100-200', :between_100_200],
-      ['200-500', :between_200_500],
-      ['500-1000', :between_500_1000],
-      ['> 1000', :more_1000]
-    ]
+    Space.capacities.keys.map{ |c| [capacity_humanized(c), c] }
   end
 
   def hours_options
@@ -34,5 +27,16 @@ module ApplicationHelper
 
   def category_options
     Category.active.map { |c| [c.name, c.id] }
+  end
+
+  def capacity_humanized(capacity)
+    {
+      less_50: '< 50',
+      between_50_100: '50-100',
+      between_100_200: '100-200',
+      between_200_500: '200-500',
+      between_500_1000: '500-1000',
+      more_1000: '> 1000'
+    }[capacity.to_sym]
   end
 end

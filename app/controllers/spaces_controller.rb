@@ -4,6 +4,10 @@ class SpacesController < ApplicationController
     @spaces = @search_form.search(Space.all).page(params[:page])
   end
 
+  def show
+    @space = Space.find(params[:id])
+  end
+
   private
 
     def search_params

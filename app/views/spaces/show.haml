@@ -1,0 +1,60 @@
+.container
+  .row
+    .col-xs-12
+      %h2
+        = @space.name.capitalize
+        %span.location
+          = "(#{@space.city.name}, #{@space.city.state.name})"
+
+      .carousel-container
+        = render 'shared/carousel', id: 'space-slider', images: @space.space_pictures.map{ |p| p.image.croped.url }
+  .row
+    .col-md-8.col-md-offset-2
+      .space-detail.p20
+        %section.row
+          .col-xs-12
+            %h3.text-primary Summary
+          .col-xs-6
+            = render 'shared/info_table', info: { 'Space Type': @space.categories.pluck(:name).join(', '),
+              'Classification': @space.classification.to_s.humanize,
+              'Capacity': capacity_humanized(@space.capacity),
+              'Website': @space.website || 'N/A'}
+          .col-xs-6
+            = render 'shared/info_table', info: { 'Hourly Price': number_to_currency(@space.price_hourly),
+              'Minimum Number of Hours ': @space.minimum_number_of_hours,
+              'Daily Price': number_to_currency(@space.price_daily),
+              'Buy Out Price': number_to_currency(@space.price_buyout)}
+        %hr/
+
+        %section.row
+          .col-xs-12
+            %h3.text-primary Ammenities
+          - Space.amenities.each_slice(3) do |group|
+            .col-xs-4
+              - group.each do |amenity|
+                %p
+                  - if @space.send("#{amenity}?")
+                    %span.glyphicon.glyphicon-ok.bg-primary.p2
+                  - else
+                    %span.glyphicon.glyphicon-remove.text-muted.p2
+                  = amenity.to_s.humanize
+        %hr/
+
+        %section.row
+          .col-xs-6
+            %h3.text-primary Availability
+            = render 'shared/info_table', info: @space.formatted_availabilities
+          .col-xs-6
+            %h3.text-primary Note
+            %p
+              = @space.special_note.present? ? @space.special_note : 'N/A'
+        %hr/
+
+        %section.row
+          .col-xs-12
+            %h3.text-primary Space
+            = @space.description
+          .col-xs-12
+            %h3.text-primary Organization Description
+            = @space.organization_description.present? ? @space.organization_description : 'N/A'
+
