@@ -10,7 +10,8 @@ space_owner = SpaceOwner.new(
 space_owner.skip_confirmation!
 space_owner.save!
 
-customer = Customer.new(email: "customer@example.com", password: 'password', password_confirmation: 'password')
+customer = Customer.new(email: "customer@example.com", password: 'password', password_confirmation: 'password',
+  first_name: 'Peter', last_name: 'Parker')
 customer.skip_confirmation!
 customer.save!
 
