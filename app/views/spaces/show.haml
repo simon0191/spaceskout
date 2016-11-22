@@ -1,6 +1,6 @@
 .container
   .row
-    .col-xs-12
+    .col-xs-12.col-md-8.col-md-offset-2
       %h2
         = @space.name.capitalize
         %span.location
@@ -9,7 +9,7 @@
       .carousel-container
         = render 'shared/carousel', id: 'space-slider', images: @space.space_pictures.map{ |p| p.image.croped.url }
   .row
-    .col-md-8.col-md-offset-2
+    .col-xs-12.col-md-8.col-md-offset-2
       .space-detail.p20
         %section.row
           .col-xs-12

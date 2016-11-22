@@ -1,20 +1,18 @@
 .results-container
   .row
     - spaces.each do |space|
-      .col-md-4.p5
-        .space-card
+      .col-md-4
+        .space-card.shadow-border
           .space-picture
-            %img{class: 'text-center img-responsive', src: space.main_picture.try(:croped).try(:url)}
-          .space-info
-            .space-other-info.pull-right
-              %img{class: 'text-center img-responsive rating', src: asset_url("rating-#{space.rating.floor}.png")}
-              = "#{pluralize(space.ratings.count,'Review')}"
-              %p
-                %span.price
-                  = "$#{space.price_hourly}"
-                \/hr
-            .space-general-info.pull-left
-              = link_to("#{space.name} / #{space.city.try(:name)}", space_path(space.id) )
-              %p= "(#{space.classification.to_s.humanize})"
+            %img.center-block.img-responsive{src: space.main_picture.try(:croped).try(:url)}
+          .space-info.text-center
+            = link_to("#{space.name} / #{space.city.try(:name)}", space_path(space.id) )
+            %p= "(#{space.classification.to_s.humanize})"
+            %img.img-responsive.rating.center-block{src: asset_url("rating-#{space.rating.floor}.png")}
+            = "#{pluralize(space.ratings.count,'Review')}"
+            %p
+              %span.price
+                = "$#{space.price_hourly}"
+              \/hr
   .row
     = paginate spaces

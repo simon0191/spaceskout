@@ -1,8 +1,9 @@
 .container
   .row
     .col-xs-12
-      .page-container.row
-        .col-md-4
-          = render 'search_form', search_form: @search_form
-        .col-md-8
-          = render 'search_results', spaces: @spaces
+      .page-container
+        .row
+          .col-md-4.col-xs-6
+            = render 'search_form', search_form: @search_form
+          .col-md-8.col-xs-6
+            = render 'search_results', spaces: @spaces
