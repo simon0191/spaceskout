@@ -1,0 +1,12 @@
+STRIPE_PUBLIC_KEY:        pk_test_xxxxxxxxxxxxxxxxx
+STRIPE_SECRET_KEY:        sk_test_yyyyyyyyyyyyyyyyy
+FILE_STORAGE:             file
+
+production:
+  AWS_ACCESS_KEY:         XXXXXXXXXXXXX
+  AWS_ACCESS_SECRET:      yyyyyyyyyyyyyyyyyyy
+  AWS_REGION:             us-west-2
+  AWS_S3_BUCKET:          bucket_name
+  FILE_STORAGE:           fog
+  STRIPE_PUBLIC_KEY:      pk_live_xxxxxxxxxxxxxxxxx
+  STRIPE_SECRET_KEY:      sk_live_yyyyyyyyyyyyyyyyy
