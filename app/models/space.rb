@@ -45,11 +45,13 @@
 #  city_id                    :integer
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
+#  subscription_id            :integer
 #
 
 class Space < ActiveRecord::Base
-  belongs_to :user
   belongs_to :city
+  belongs_to :user
+  belongs_to :subscription
   has_many :categories, through: :space_categories
   has_many :ratings
   has_many :space_categories
@@ -78,6 +80,8 @@ class Space < ActiveRecord::Base
   validate :validate_at_least_1_amenities
   validate :validate_at_least_1_day
 
+  scope :published, -> { joins(:subscription).where('subscriptions.valid_through > ?', DateTime.now) }
+
   def self.amenities
     @amenities ||= [:wifi, :audio_visual, :projector, :white_board, :table_chair, :parking, :phone_number, :kitchen, :catering]
   end
@@ -92,6 +96,10 @@ class Space < ActiveRecord::Base
 
   def self.weekend_days
     @weekdays ||=  [:saturday, :sunday]
+  end
+
+  def published?
+    subscription && subscription.valid_through > DateTime.now
   end
 
   def main_picture

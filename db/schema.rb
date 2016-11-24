@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161121230440) do
+ActiveRecord::Schema.define(version: 20161124190004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,26 @@ ActiveRecord::Schema.define(version: 20161121230440) do
   end
 
   add_index "cities", ["state_id"], name: "index_cities_on_state_id", using: :btree
+
+  create_table "coupons", force: :cascade do |t|
+    t.integer  "coupon_type"
+    t.decimal  "discount",    precision: 15, scale: 2, default: 0.0
+    t.string   "code"
+    t.integer  "plan_id"
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+  end
+
+  add_index "coupons", ["plan_id"], name: "index_coupons_on_plan_id", using: :btree
+
+  create_table "plans", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "number_of_publications"
+    t.decimal  "price",                  precision: 15, scale: 2, default: 0.0
+    t.integer  "duration_in_days",                                default: 0
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
+  end
 
   create_table "ratings", force: :cascade do |t|
     t.integer  "stars",      default: 0
@@ -117,9 +137,11 @@ ActiveRecord::Schema.define(version: 20161121230440) do
     t.integer  "city_id"
     t.datetime "created_at",                                                          null: false
     t.datetime "updated_at",                                                          null: false
+    t.integer  "subscription_id"
   end
 
   add_index "spaces", ["city_id"], name: "index_spaces_on_city_id", using: :btree
+  add_index "spaces", ["subscription_id"], name: "index_spaces_on_subscription_id", using: :btree
   add_index "spaces", ["user_id"], name: "index_spaces_on_user_id", using: :btree
 
   create_table "states", force: :cascade do |t|
@@ -128,6 +150,21 @@ ActiveRecord::Schema.define(version: 20161121230440) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.datetime "valid_through"
+    t.integer  "plan_id"
+    t.integer  "coupon_id"
+    t.integer  "user_id"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.string   "stripe_charge_id"
+    t.decimal  "amount_paid",      precision: 15, scale: 2
+  end
+
+  add_index "subscriptions", ["coupon_id"], name: "index_subscriptions_on_coupon_id", using: :btree
+  add_index "subscriptions", ["plan_id"], name: "index_subscriptions_on_plan_id", using: :btree
+  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -158,11 +195,16 @@ ActiveRecord::Schema.define(version: 20161121230440) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "cities", "states"
+  add_foreign_key "coupons", "plans"
   add_foreign_key "ratings", "spaces"
   add_foreign_key "ratings", "users"
   add_foreign_key "space_categories", "categories"
   add_foreign_key "space_categories", "spaces"
   add_foreign_key "space_pictures", "spaces"
   add_foreign_key "spaces", "cities"
+  add_foreign_key "spaces", "subscriptions"
   add_foreign_key "spaces", "users"
+  add_foreign_key "subscriptions", "coupons"
+  add_foreign_key "subscriptions", "plans"
+  add_foreign_key "subscriptions", "users"
 end

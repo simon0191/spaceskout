@@ -41,3 +41,10 @@ Charity.create(
   remote_logo_url: "https://s3-us-west-2.amazonaws.com/spaceskout/BOSS.Logo.040416.withtagline.WEB.jpg",
   featured: true
 )
+
+basic = Plan.create!(name: 'Basic', number_of_publications: 1, price: 350.0, duration_in_days: 365)
+silver = Plan.create!(name: 'Silver', number_of_publications: 2, price: 525.0, duration_in_days: 365)
+gold = Plan.create!(name: 'Gold', number_of_publications: 5, price: 1290.0, duration_in_days: 365)
+
+Coupon.create!(code: 'BASIC50OFF', plan: basic, coupon_type: :discount_percentage, discount: 50.0)
+Coupon.create!(code: '10OFF', coupon_type: :discount_percentage, discount: 50.0)

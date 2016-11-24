@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, SpaceOwners::AvatarUploader
 
   has_many :spaces
+  has_many :subscriptions
 
   def has_access_level?(role)
     [:customer].include?(role.to_sym)
