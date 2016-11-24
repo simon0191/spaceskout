@@ -176,7 +176,10 @@
       = f.nested_fields_for :space_pictures do |ff|
         .row
           .col-xs-7
-            = ff.file_field :image, class: 'form-control'
+            - if ff.object.try(:persisted?)
+              = image_tag ff.object.image.thumb.url
+            - else
+              = ff.file_field :image, class: 'form-control'
           .col-xs-1
             = ff.remove_nested_fields_link
       = f.add_nested_fields_link :space_pictures
@@ -185,4 +188,7 @@
       = render 'shared/forms/error', resource: space, field: :space_pictures
 
   .text-right
-    = f.submit 'ADD SPACE', class: 'btn btn-info'
+    - if space.new_record?
+      = f.submit 'ADD SPACE', class: 'btn btn-info'
+    - else
+      = f.submit 'UPDATE SPACE', class: 'btn btn-info'
