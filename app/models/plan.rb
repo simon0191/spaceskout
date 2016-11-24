@@ -9,6 +9,7 @@
 #  duration_in_days       :integer          default(0)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  additional_info        :text
 #
 
 class Plan < ActiveRecord::Base

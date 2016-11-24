@@ -12,7 +12,8 @@ class Subscriptions::ChargeAndCreateForm < BaseForm
       plan: plan,
       coupon: coupon,
       amount_paid: Subscription.calc_amount_to_pay(plan, coupon),
-      valid_through: DateTime.now + plan.duration_in_days.days
+      valid_through: DateTime.now + plan.duration_in_days.days,
+      available_publications: plan.number_of_publications
     )
 
     response = Stripe::Charge.create(

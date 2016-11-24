@@ -2,13 +2,16 @@
 #
 # Table name: subscriptions
 #
-#  id            :integer          not null, primary key
-#  valid_through :datetime
-#  plan_id       :integer
-#  coupon_id     :integer
-#  user_id       :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id                     :integer          not null, primary key
+#  valid_through          :datetime
+#  plan_id                :integer
+#  coupon_id              :integer
+#  user_id                :integer
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  stripe_charge_id       :string
+#  amount_paid            :decimal(15, 2)
+#  available_publications :integer
 #
 
 class Subscription < ActiveRecord::Base
@@ -20,6 +23,9 @@ class Subscription < ActiveRecord::Base
   validates :valid_through, presence: true
   validates :user, presence: true
   validates :plan, presence: true
+
+  scope :not_expired, -> { where('valid_through > ?', DateTime.now) }
+  scope :with_available_posts, -> { where('available_publications > 0') }
 
   def self.calc_amount_to_pay(plan, coupon)
     case coupon.try(:coupon_type)
@@ -35,4 +41,9 @@ class Subscription < ActiveRecord::Base
   def amount_paid_in_cents
     (amount_paid * 100.0).floor
   end
+
+  def not_expired?
+    valid_through > DateTime.now
+  end
+
 end

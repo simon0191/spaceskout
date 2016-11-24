@@ -20,6 +20,17 @@ class Dashboard::SpacesController < Dashboard::BaseController
     end
   end
 
+  def publish
+    space = current_user.spaces.find(params[:id])
+    publish_form = Spaces::PublishForm.new(user: current_user, space: space)
+    if publish_form.save!
+      redirect_to dashboard_spaces_path(notice: 'Space published')
+    else
+      flash[:error] = publish_form.errors.full_messages.join('\n')
+      redirect_to dashboard_spaces_path
+    end
+  end
+
   private
 
     def space_params

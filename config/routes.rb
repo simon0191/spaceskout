@@ -21,7 +21,11 @@ Rails.application.routes.draw do
 
   namespace :dashboard do
     get '/', to: redirect('/dashboard/spaces'), as: :root
-    resources :spaces, only: [:index, :new, :create]
+    resources :spaces, only: [:index, :new, :create] do
+      member do
+        patch :publish
+      end
+    end
     resources :plans, only: [:index] do
       member do
         get :validate_coupon

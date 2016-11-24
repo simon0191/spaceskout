@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124201957) do
+ActiveRecord::Schema.define(version: 20161124213341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,10 +157,11 @@ ActiveRecord::Schema.define(version: 20161124201957) do
     t.integer  "plan_id"
     t.integer  "coupon_id"
     t.integer  "user_id"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.string   "stripe_charge_id"
-    t.decimal  "amount_paid",      precision: 15, scale: 2
+    t.decimal  "amount_paid",            precision: 15, scale: 2
+    t.integer  "available_publications"
   end
 
   add_index "subscriptions", ["coupon_id"], name: "index_subscriptions_on_coupon_id", using: :btree

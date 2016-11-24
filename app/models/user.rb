@@ -40,4 +40,8 @@ class User < ActiveRecord::Base
   def has_access_level?(role)
     [:customer].include?(role.to_sym)
   end
+
+  def available_posts
+    subscriptions.not_expired.sum(:available_publications) - spaces.published.count
+  end
 end

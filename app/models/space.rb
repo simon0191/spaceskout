@@ -99,7 +99,7 @@ class Space < ActiveRecord::Base
   end
 
   def published?
-    subscription && subscription.valid_through > DateTime.now
+    subscription && subscription.not_expired?
   end
 
   def main_picture

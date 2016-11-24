@@ -2,7 +2,11 @@
   .row
     .col-xs-12
       %h1 Your Spaces
-
+  .row
+    .col-xs-12.p20
+      Available posts: #{current_user.available_posts}
+  .row
+    .col-xs-12
       .table-responsive
         %table.table
           %thead
@@ -20,3 +24,12 @@
                 %td= space.address
                 %td= number_to_currency(space.price_hourly)
                 %td= space.rating
+                %td
+                  - if space.published?
+                    .label.label-success
+                      %span.glyphicon.glyphicon-ok
+                      published
+                  - elsif current_user.available_posts > 0
+                    = button_to 'Publish', publish_dashboard_space_path(space.id), method: :patch, class: 'btn btn-primary'
+                  - else
+                    = link_to 'Publish', dashboard_plans_path, class: 'btn btn-secondary btn-xs'
