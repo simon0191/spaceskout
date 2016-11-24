@@ -15,7 +15,14 @@
 html, body {
   height: 100%;
 }
-
+.full-height-flex-container {
+  display: flex;
+  flex-direction: column;
+  .full-height-flex {
+    flex-grow: 1;
+    display: block;
+  }
+}
 .full-height-with-nav {
   height: calc(100% - #{$navbar-height});
 }
