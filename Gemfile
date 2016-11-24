@@ -49,6 +49,8 @@ end
 
 group :production do
   gem 'rails_12factor'
+  gem 'puma', '~> 3.6.2'
+  gem 'rack-timeout', '~> 0.4.2'
 end
 
 gem 'bootstrap-sass', '~> 3.3.6'
