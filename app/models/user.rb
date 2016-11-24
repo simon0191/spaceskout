@@ -42,6 +42,6 @@ class User < ActiveRecord::Base
   end
 
   def available_posts
-    subscriptions.not_expired.sum(:available_publications) - spaces.published.count
+    subscriptions.not_expired.sum(:available_publications)
   end
 end

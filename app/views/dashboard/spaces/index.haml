@@ -32,4 +32,6 @@
                   - elsif current_user.available_posts > 0
                     = button_to 'Publish', publish_dashboard_space_path(space.id), method: :patch, class: 'btn btn-primary'
                   - else
-                    = link_to 'Publish', dashboard_plans_path, class: 'btn btn-secondary btn-xs'
+                    = link_to 'Publish', dashboard_plans_path, class: 'btn btn-primary'
+                %td
+                  = link_to 'Edit', edit_dashboard_space_path(space.id), class: 'btn btn-info'

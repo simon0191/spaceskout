@@ -20,11 +20,28 @@ class Dashboard::SpacesController < Dashboard::BaseController
     end
   end
 
+  def edit
+    @space = current_user.spaces.find(params[:id])
+  end
+
+  def update
+    @space = current_user.spaces.find(params[:id])
+    if @space.update(space_params)
+      redirect_to dashboard_spaces_path, notice: 'Space has been updated successfully'
+    else
+      if @space.space_pictures.length < 3
+        3.times{ @space.space_pictures.build }
+      end
+      render :edit
+    end
+  end
+
   def publish
     space = current_user.spaces.find(params[:id])
     publish_form = Spaces::PublishForm.new(user: current_user, space: space)
     if publish_form.save!
-      redirect_to dashboard_spaces_path(notice: 'Space published')
+      flash[:notice] = 'Space published'
+      redirect_to dashboard_spaces_path
     else
       flash[:error] = publish_form.errors.full_messages.join('\n')
       redirect_to dashboard_spaces_path
