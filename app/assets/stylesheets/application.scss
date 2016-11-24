@@ -3,6 +3,7 @@
 @import "bootstrap";
 @import "bootstrap-slider";
 
+@import "dashboard/plans/index";
 @import "footer";
 @import "pages/home";
 @import "registrations";
@@ -15,7 +16,7 @@
 html, body {
   height: 100%;
 }
-.full-height-flex-container {
+.flex-col-container {
   display: flex;
   flex-direction: column;
   .full-height-flex {

@@ -1,0 +1,12 @@
+[data-controller="dashboard/plans"][data-action="index"] {
+  .plans-container {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    .plan-box {
+      height: 300px;
+      border: solid grey 1px;
+      padding: 20px 15px;
+      margin-bottom: 20px;
+    }
+  }
+}
