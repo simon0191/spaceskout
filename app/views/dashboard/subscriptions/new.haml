@@ -1,0 +1,10 @@
+.container
+  .row
+    .col-xs-12.col-md-8.col-md-offset-2
+      %h3= @plan.name
+      = render layout: 'shared/stripe_btn', locals: {url: dashboard_plan_subscriptions_path(@plan.id)} do
+        .form-group
+          %label{for: 'coupon_code'} Coupon code
+          %input.form-control{type: 'text', name: 'coupon_code'}
+
+

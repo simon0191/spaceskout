@@ -1,0 +1,40 @@
+-# required: coupon_form
+= form_tag validate_coupon_dashboard_plan_path(coupon_form.plan.id), method: 'GET', remote: true, id: "coupon-form-#{coupon_form.plan.id}" do
+  .form-group{class: error_class(coupon_form, :coupon_code)}
+    %input.form-control{type: 'text', name: 'coupon_code', value: coupon_form.coupon_code, placeholder: 'Enter a promo code'}
+    = render 'shared/forms/error', resource: coupon_form, field: :coupon_code
+  .text-right
+    %button.btn.btn-default.skip{type: 'button'} Skip
+    %input.btn.btn-success{type: 'submit', value: 'Use promo code'}
+
+:javascript
+  $(document).ready(function() {
+    $("#coupon-form-#{coupon_form.plan.id} .skip").on('click', function(event) {
+      event.preventDefault();
+      $(event.target).prop('disabled', true);
+      var handler = StripeCheckout.configure({
+        key: "#{ENV['STRIPE_PUBLIC_KEY']}",
+        image: "#{asset_url('logo-beta.png')}",
+        locale: 'auto',
+        name: 'Space Skout',
+        description: "Subscription to #{coupon_form.plan.name.capitalize} plan",
+        token: function(token) {
+          $.ajax({
+            type: "POST",
+            url: "#{dashboard_plan_subscriptions_path(coupon_form.plan.id)}",
+            data: {
+              stripe_token: token.id
+            },
+            success: function() {
+              window.location = "#{dashboard_spaces_path(notice: 'Subscription created')}"
+            },
+            dataType: 'json'
+          });
+        },
+        closed: function() {
+          $(event.target).prop('disabled', false);
+        }
+      });
+      handler.open({});
+    });
+  });

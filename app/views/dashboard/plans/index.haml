@@ -1,0 +1,23 @@
+.container
+  .row
+    .col-xs-12.col-md-8.col-md-offset-2
+      - @plans.each do |plan|
+        .col-md-4
+          %h3= plan.name
+          -# new_dashboard_plan_subscription_path(plan.id)
+          %button.btn.btn-success{type: 'button', 'data-toggle': 'modal', 'data-target': "#coupon-modal-#{plan.id}"}
+            Select!
+          .modal.fade{id: "coupon-modal-#{plan.id}"}
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{type: 'button', 'data-dismiss': 'modal'}
+                    %span
+                      &times;
+                  %h4 Promo Code
+                .modal-body
+              :javascript
+                $("#coupon-modal-#{plan.id}").on('show.bs.modal', function (event) {
+                  $("#coupon-modal-#{plan.id} .modal-body")
+                    .html('#{j(render("dashboard/plans/coupon_code_form", coupon_form: ::Plans::CouponForm.new(plan: plan)))}')
+                });

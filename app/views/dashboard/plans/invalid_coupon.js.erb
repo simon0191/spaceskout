@@ -1,0 +1,2 @@
+$('#coupon-modal-<%= @coupon_form.plan.id %> .modal-body')
+  .html('<%= j render("dashboard/plans/coupon_code_form", coupon_form: @coupon_form) %>')
