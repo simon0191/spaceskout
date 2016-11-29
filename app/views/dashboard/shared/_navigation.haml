@@ -7,5 +7,5 @@
             = link_to 'Your Spaces', dashboard_spaces_path
           %li{class: params[:controller] == 'space_owners/registrations' ? 'active' : ''}
             = link_to 'Profile', edit_space_owner_registration_path
-          %li{class: params[:controller] == 'dashboard/messages' ? 'active' : ''}
-            = link_to 'Inbox', dashboard_messages_path
+          /%li{class: params[:controller] == 'dashboard/messages' ? 'active' : ''}
+          /= link_to 'Inbox', dashboard_messages_path
