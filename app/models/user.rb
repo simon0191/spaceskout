@@ -27,6 +27,7 @@
 #
 
 class User < ActiveRecord::Base
+  acts_as_messageable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
@@ -43,5 +44,18 @@ class User < ActiveRecord::Base
 
   def available_posts
     subscriptions.not_expired.sum(:available_publications)
+  end
+
+  def full_name
+    [first_name, last_name].reject(&:blank?).map(&:capitalize).join(' ')
+  end
+
+  # Mailboxer methods
+  def mailboxer_email(object)
+    email
+  end
+
+  def mailboxer_name
+    full_name
   end
 end

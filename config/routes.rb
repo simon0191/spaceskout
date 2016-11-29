@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   end
 
   resources :spaces, only: [:index, :show]
+  resources :messages, only: [:create]
 
   namespace :dashboard do
     get '/', to: redirect('/dashboard/spaces'), as: :root

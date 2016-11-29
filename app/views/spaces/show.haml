@@ -11,6 +11,34 @@
   .row
     .col-xs-12.col-md-8.col-md-offset-2
       .space-detail.p20
+        - if user_signed_in? && current_user != @space.owner
+          %section.row
+            .col-xs-12
+              .pull-right
+                %button.btn.btn-secondary.btn-lg{type: 'button', 'data-toggle': 'modal', 'data-target': "#contact-owner-modal"}
+                  Contact the Owner
+              #contact-owner-modal.modal.fade
+                .modal-dialog
+                  .modal-content
+                    .modal-header
+                      %button.close{type: 'button', 'data-dismiss': 'modal'}
+                        %span
+                          &times;
+                      %h4 Contact The Owner of #{@space.name.capitalize}
+                    = form_for :message, url: messages_path do |f|
+                      = f.hidden_field :space_id, value: @space.id
+                      .modal-body
+                        .form-group
+                          = f.text_area :body, class: 'form-control'
+                      .modal-footer
+                        .pull-right
+                          = f.submit 'Send', class: 'btn btn-secondary'
+        - elsif !user_signed_in?
+          %section.row
+            .col-xs-12
+              .pull-right
+                = link_to 'Login to contact the Owner', new_user_session_path, class: 'btn btn-secondary btn-lg'
+
         %section.row
           .col-xs-12
             %h3.text-primary Summary

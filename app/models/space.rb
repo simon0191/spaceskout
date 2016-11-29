@@ -51,6 +51,7 @@
 class Space < ActiveRecord::Base
   belongs_to :city
   belongs_to :user
+  alias_method :owner, :user
   belongs_to :subscription
   has_many :categories, through: :space_categories
   has_many :ratings
