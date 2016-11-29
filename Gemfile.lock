@@ -151,6 +151,7 @@ GEM
       jquery-rails
       rails (>= 3.2.0)
     netrc (0.11.0)
+    newrelic_rpm (3.17.1.326)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
@@ -268,6 +269,7 @@ DEPENDENCIES
   letter_opener (~> 1.4.1)
   mailboxer (~> 0.14.0)
   nested_form_fields (~> 0.8)
+  newrelic_rpm (~> 3.17)
   pg (~> 0.15)
   puma (~> 3.6.2)
   rack-timeout (~> 0.4.2)

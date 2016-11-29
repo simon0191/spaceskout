@@ -51,6 +51,7 @@ group :production do
   gem 'rails_12factor'
   gem 'puma', '~> 3.6.2'
   gem 'rack-timeout', '~> 0.4.2'
+  gem 'newrelic_rpm', '~> 3.17'
 end
 
 gem 'bootstrap-sass', '~> 3.3.6'
