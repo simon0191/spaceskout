@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :messages, only: [:create]
 
   namespace :dashboard do
-    get '/', to: redirect('/dashboard/spaces'), as: :root
+    get '/', to: redirect('/space_owners/edit'), as: :root
     resources :spaces, only: [:index, :new, :create, :edit, :update] do
       member do
         patch :publish
