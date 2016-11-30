@@ -1,4 +1,5 @@
 class Dashboard::SpacesController < Dashboard::BaseController
+  before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
 
   def index
     @spaces = current_user.spaces
@@ -65,8 +66,17 @@ class Dashboard::SpacesController < Dashboard::BaseController
         # General info
         :name, :classification, :phone, :capacity, :special_note, :description, :website, category_ids: [],
         # Pictures
-        space_pictures_attributes: [:image, :image_cache, :_destroy, :id]
+        space_pictures_attributes: [:temp_image_url, :_destroy, :id]
       )
+    end
+
+    def set_s3_direct_post
+      @s3_direct_post = S3_BUCKET.presigned_post(
+        key: "tmp/#{SecureRandom.uuid}/${filename}",
+        success_action_status: '201',
+        acl: 'public-read'
+      )
+      puts @s3_direct_post.fields
     end
 end
 

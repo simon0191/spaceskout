@@ -13,6 +13,7 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery_ujs
+//= require jquery-fileupload/basic
 //= require turbolinks
 //= require nested_form_fields
 //= require bootstrap-slider

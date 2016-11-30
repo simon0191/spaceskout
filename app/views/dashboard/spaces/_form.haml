@@ -1,5 +1,5 @@
 -# required: space
-= form_for([:dashboard, space], html: {class: 'ss-form'} ) do |f|
+= form_for([:dashboard, space], html: {class: 'ss-form direct-upload'} ) do |f|
   .form-group.row{class: error_class(space, :categories)}
     .col-md-3.text-right-md
       = f.label :category_ids, 'Type of Space', class: 'required'
@@ -179,7 +179,7 @@
             - if ff.object.try(:persisted?)
               = image_tag ff.object.image.thumb.url
             - else
-              = ff.file_field :image, class: 'form-control'
+              = ff.file_field :remote_image_url, class: 'form-control'
           .col-xs-1
             = ff.remove_nested_fields_link
       = f.add_nested_fields_link :space_pictures
@@ -192,3 +192,52 @@
       = f.submit 'ADD SPACE', class: 'btn btn-info'
     - else
       = f.submit 'UPDATE SPACE', class: 'btn btn-info'
+
+:javascript
+  $(document).ready(function() {
+    $('.direct-upload').find('input:file').each(function(i, elem) {
+      var fileInput    = $(elem);
+      var form         = $(fileInput.parents('form:first'));
+      var submitButton = form.find('input[type="submit"]');
+      var progressBar  = $("<div class='progress-bar progress-bar-success'></div>");
+      var barContainer = $("<div class='progress'></div>").append(progressBar);
+      fileInput.after(barContainer);
+      fileInput.fileupload({
+        fileInput:        fileInput,
+        url:              '#{@s3_direct_post.url}',
+        type:             'POST',
+        autoUpload:       true,
+        formData:         #{@s3_direct_post.fields.to_json},
+        paramName:        'file',
+        dataType:         'XML',
+        replaceFileInput: false,
+        progressall: function (e, data) {
+          var progress = parseInt(data.loaded / data.total * 100, 10);
+          progressBar.css('width', progress + '%')
+        },
+        start: function (e) {
+          submitButton.prop('disabled', true);
+        },
+        done: function(e, data) {
+          submitButton.prop('disabled', false);
+          progressBar.text('Uploading done');
+
+          // extract key and generate URL from response
+          var key = $(data.jqXHR.responseXML).find("Key").text();
+          var fileUrl = 'http://#{URI.parse(@s3_direct_post.url).host}/' + key;
+
+          // create hidden field
+          var input = $('<input />', { type: 'hidden', name: fileInput.attr('name'), value: fileUrl })
+          form.append(input);
+        },
+        fail: function(e, data) {
+          submitButton.prop('disabled', false);
+
+          progressBar.
+            removeClass('progress-success').
+            addClass('progress-danger').
+            text('Failed');
+        }
+      });
+    });
+  })
