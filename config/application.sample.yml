@@ -5,10 +5,21 @@ STRIPE_SECRET_KEY:        sk_test_yyyyyyyyyyyyyyyyy
 FILE_STORAGE:             file
 
 production:
-  AWS_ACCESS_KEY_ID:      XXXXXXXXXXXXX
-  AWS_SECRET_ACCESS_KEY:  yyyyyyyyyyyyyyyyyyy
-  AWS_REGION:             us-west-2
-  AWS_S3_BUCKET:          bucket_name
-  FILE_STORAGE:           fog
-  STRIPE_PUBLIC_KEY:      pk_live_xxxxxxxxxxxxxxxxx
-  STRIPE_SECRET_KEY:      sk_live_yyyyyyyyyyyyyyyyy
+  AWS_ACCESS_KEY_ID:          XXXXXXXXXXXXX
+  AWS_SECRET_ACCESS_KEY:      yyyyyyyyyyyyyyyyyyy
+  AWS_REGION:                 us-west-2
+  AWS_S3_BUCKET:              bucket_name
+  FILE_STORAGE:               fog
+
+  STRIPE_PUBLIC_KEY:          pk_live_xxxxxxxxxxxxxxxxx
+  STRIPE_SECRET_KEY:          sk_live_yyyyyyyyyyyyyyyyy
+
+  EMAIL_AUTHENTICATION:       plain
+  EMAIL_ENABLE_STARTTLS_AUTO: true
+  EMAIL_SMTP_ADDRESS:         smtp.example.com
+  EMAIL_SMTP_PORT:            587
+  SENDGRID_PASSWORD:          xxxxxxxxxxxxxxxx
+  SENDGRID_USERNAME:          username@example.com
+  SS_HOST:                    www.spaceskout.com
+
+  NEW_RELIC_LICENSE_KEY:      zzzzzzzzzzzzzzzzzzzzzz

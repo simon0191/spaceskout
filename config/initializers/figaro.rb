@@ -13,7 +13,17 @@ if ENV['FILE_STORAGE'] == 'fog'
 end
 
 if Rails.env.production?
-  required_keys << 'NEW_RELIC_LICENSE_KEY'
+  required_keys += [
+    'EMAIL_AUTHENTICATION',
+    'EMAIL_ENABLE_STARTTLS_AUTO',
+    'EMAIL_SMTP_ADDRESS',
+    'EMAIL_SMTP_PORT',
+    'SENDGRID_PASSWORD',
+    'SENDGRID_USERNAME',
+    'SS_HOST',
+
+    'NEW_RELIC_LICENSE_KEY',
+  ]
 end
 
 Figaro.require_keys(*required_keys)
