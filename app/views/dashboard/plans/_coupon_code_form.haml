@@ -16,7 +16,7 @@
         key: "#{ENV['STRIPE_PUBLIC_KEY']}",
         image: "#{asset_url('logo-beta.png')}",
         locale: 'auto',
-        name: 'Space Skout',
+        name: 'SpaceSkout',
         description: "Subscription to #{coupon_form.plan.name.capitalize} plan",
         token: function(token) {
           $.ajax({
