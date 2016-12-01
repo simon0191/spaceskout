@@ -23,7 +23,7 @@
                 %td= link_to space.name, space_path(space.id)
                 %td= space.classification.to_s.humanize
                 %td= space.address
-                %td= number_to_currency(space.price_hourly)
+                %td= number_to_currency(space.price_hourly, precision: 0)
                 %td= space.rating
                 %td
                   - if space.published?

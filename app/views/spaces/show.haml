@@ -48,10 +48,10 @@
               'Capacity': capacity_humanized(@space.capacity),
               'Website': @space.website || 'N/A'}
           .col-xs-6
-            = render 'shared/info_table', info: { 'Hourly Price': number_to_currency(@space.price_hourly),
+            = render 'shared/info_table', info: { 'Hourly Price': number_to_currency(@space.price_hourly, precision: 0),
               'Minimum Number of Hours ': @space.minimum_number_of_hours,
-              'Daily Price': number_to_currency(@space.price_daily),
-              'Buy Out Price': number_to_currency(@space.price_buyout)}
+              'Daily Price': number_to_currency(@space.price_daily, precision: 0),
+              'Buy Out Price': number_to_currency(@space.price_buyout, precision: 0)}
         %hr/
 
         %section.row
