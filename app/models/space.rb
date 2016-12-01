@@ -113,17 +113,21 @@ class Space < ActiveRecord::Base
 
   def formatted_availabilities
     result = {}
-    self.class.week_days.reduce(result) do |r, day|
-      if self.send("#{day}?")
-        r[day.capitalize] = "#{num_to_hour(weekdays_availability_from)} - #{num_to_hour(weekdays_availability_to)}"
+    if weekdays_availability_from.present?
+      self.class.week_days.reduce(result) do |r, day|
+        if self.send("#{day}?")
+          r[day.capitalize] = "#{num_to_hour(weekdays_availability_from)} - #{num_to_hour(weekdays_availability_to)}"
+        end
+        r
       end
-      r
     end
-    self.class.weekend_days.reduce(result) do |r, day|
-      if self.send("#{day}?")
-        r[day.capitalize] = "#{num_to_hour(weekend_availability_from)} - #{num_to_hour(weekend_availability_to)}"
+    if weekend_availability_from.present?
+      self.class.weekend_days.reduce(result) do |r, day|
+        if self.send("#{day}?")
+          r[day.capitalize] = "#{num_to_hour(weekend_availability_from)} - #{num_to_hour(weekend_availability_to)}"
+        end
+        r
       end
-      r
     end
     result
   end
