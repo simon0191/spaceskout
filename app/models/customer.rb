@@ -30,4 +30,16 @@ class Customer < User
 
   validates :first_name, presence: true
   validates :last_name, presence: true
+
+
+  validate :validate_phone_10_digits, if: -> { phone.present? }
+
+
+  private
+
+    def validate_phone_10_digits
+      if phone.present? && phone.gsub(/\D/,'').length != 10
+        errors[:phone] << 'should have 10 digits (includes area code)'
+      end
+    end
 end

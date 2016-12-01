@@ -80,6 +80,7 @@ class Space < ActiveRecord::Base
   validate :validate_at_leat_1_category
   validate :validate_at_least_1_amenities
   validate :validate_at_least_1_day
+  validate :validate_phone_10_digits
 
   scope :published, -> { joins(:subscription).where('subscriptions.valid_through > ?', DateTime.now) }
 
@@ -155,6 +156,12 @@ class Space < ActiveRecord::Base
     def num_to_hour(n)
       date = DateTime.current.beginning_of_day
       "#{date.change(hour: n).strftime('%l:00 %p')}"
+    end
+
+    def validate_phone_10_digits
+      if phone.present? && phone.gsub(/\D/,'').length != 10
+        errors[:phone] << 'should have 10 digits (includes area code)'
+      end
     end
 
 end
