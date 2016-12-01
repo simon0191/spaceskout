@@ -2,7 +2,7 @@
   .row
     .col-xs-12.col-md-8.col-md-offset-2
       %h2
-        = @space.name.capitalize
+        = @space.name
         %span.location
           = "(#{@space.city.name}, #{@space.city.state.name})"
 
@@ -24,7 +24,7 @@
                       %button.close{type: 'button', 'data-dismiss': 'modal'}
                         %span
                           &times;
-                      %h4 Contact The Owner of #{@space.name.capitalize}
+                      %h4 Contact The Owner of #{@space.name}
                     = form_for :message, url: messages_path do |f|
                       = f.hidden_field :space_id, value: @space.id
                       .modal-body
@@ -49,7 +49,7 @@
               'Website': @space.website || 'N/A'}
           .col-xs-6
             = render 'shared/info_table', info: { 'Hourly Price': number_to_currency(@space.price_hourly, precision: 0),
-              'Minimum Number of Hours ': @space.minimum_number_of_hours,
+              'Minimum # of Hours ': @space.minimum_number_of_hours,
               'Daily Price': number_to_currency(@space.price_daily, precision: 0),
               'Buy Out Price': number_to_currency(@space.price_buyout, precision: 0)}
         %hr/
