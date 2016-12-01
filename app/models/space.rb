@@ -96,7 +96,7 @@ class Space < ActiveRecord::Base
   end
 
   def self.weekend_days
-    @weekdays ||=  [:saturday, :sunday]
+    @weekend_days ||=  [:saturday, :sunday]
   end
 
   def published?

@@ -179,7 +179,7 @@
             - if ff.object.try(:persisted?)
               = image_tag ff.object.image.thumb.url
             - else
-              = ff.file_field :remote_image_url, class: 'form-control'
+              = ff.file_field :temp_image_url, class: 'form-control'
           .col-xs-1
             = ff.remove_nested_fields_link
       = f.add_nested_fields_link :space_pictures
@@ -227,8 +227,10 @@
           var fileUrl = 'http://#{URI.parse(@s3_direct_post.url).host}/' + key;
 
           // create hidden field
-          var input = $('<input />', { type: 'hidden', name: fileInput.attr('name'), value: fileUrl })
-          form.append(input);
+          var tempImageUrlInput = $('<input />', { type: 'hidden', name: fileInput.attr('name'), value: fileUrl })
+          var tempImageS3KeyInput = $('<input />', { type: 'hidden', name: fileInput.attr('name').replace(/temp_image_url/,'temp_image_s3_key'), value: key })
+          form.append(tempImageUrlInput);
+          form.append(tempImageS3KeyInput);
         },
         fail: function(e, data) {
           submitButton.prop('disabled', false);

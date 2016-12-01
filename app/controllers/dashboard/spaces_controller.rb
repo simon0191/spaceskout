@@ -66,13 +66,13 @@ class Dashboard::SpacesController < Dashboard::BaseController
         # General info
         :name, :classification, :phone, :capacity, :special_note, :description, :website, category_ids: [],
         # Pictures
-        space_pictures_attributes: [:temp_image_url, :_destroy, :id]
+        space_pictures_attributes: [:temp_image_url, :temp_image_s3_key, :_destroy, :id]
       )
     end
 
     def set_s3_direct_post
       @s3_direct_post = S3_BUCKET.presigned_post(
-        key: "tmp/#{SecureRandom.uuid}/${filename}",
+        key: "tmp/space_pictures/user_#{current_user.id}-#{DateTime.now.iso8601}-#{SecureRandom.hex(4)}-${filename}",
         success_action_status: '201',
         acl: 'public-read'
       )

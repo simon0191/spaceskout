@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161129004933) do
+ActiveRecord::Schema.define(version: 20161130235220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,10 +143,12 @@ ActiveRecord::Schema.define(version: 20161129004933) do
 
   create_table "space_pictures", force: :cascade do |t|
     t.string   "image"
-    t.boolean  "primary",    default: false
+    t.boolean  "primary",           default: false
     t.integer  "space_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.string   "temp_image_url"
+    t.string   "temp_image_s3_key"
   end
 
   add_index "space_pictures", ["space_id"], name: "index_space_pictures_on_space_id", using: :btree
