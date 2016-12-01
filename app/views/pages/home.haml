@@ -37,10 +37,13 @@
   .container
     .row
       .div.col-md-4.col-md-offset-4.col-xs-12.text-center
-        %h2 Community Give Back
-        %p
-          %strong Every quarter, we donate 10% of proceeds to the community
-        %p
-          We believe in a strong community and through our Community GiveBack Program,
-          we're investing in the people and services that make our neighborhoods so rich.
-          Every quarter, we donate 10% of proceeds from every listing to a featured charity.
+        .m20
+          %h2 Community GiveBack
+          %p
+            %strong Every quarter, we donate 10% of proceeds to the community
+          %p
+            We believe in a strong community and through our Community GiveBack Program,
+            we're investing in the people and services that make our neighborhoods so rich.
+            Every quarter, we donate 10% of proceeds from every listing to a featured charity.
+
+          = link_to 'Learn More', community_giveback_pages_path, class: 'btn btn-success btn-lg'
