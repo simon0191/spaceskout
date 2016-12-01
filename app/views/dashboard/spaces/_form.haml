@@ -215,6 +215,7 @@
     function setupUploader(fileInput) {
       var form         = $(fileInput.parents('form:first'));
       var submitButton = form.find('input[type="submit"]');
+      var fieldset     = $(fileInput.parents('fieldset:first'));
       var progressBar  = $("<div class='progress-bar progress-bar-success'></div>");
       var barContainer = $("<div class='progress'></div>").append(progressBar);
       fileInput.after(barContainer);
@@ -245,8 +246,8 @@
           // create hidden field
           var tempImageUrlInput = $('<input />', { type: 'hidden', name: fileInput.attr('name'), value: fileUrl })
           var tempImageS3KeyInput = $('<input />', { type: 'hidden', name: fileInput.attr('name').replace(/temp_image_url/,'temp_image_s3_key'), value: key })
-          form.append(tempImageUrlInput);
-          form.append(tempImageS3KeyInput);
+          fieldset.append(tempImageUrlInput);
+          fieldset.append(tempImageS3KeyInput);
         },
         fail: function(e, data) {
           submitButton.prop('disabled', false);
