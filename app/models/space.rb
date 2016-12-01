@@ -75,12 +75,12 @@ class Space < ActiveRecord::Base
   validates :price_buyout, presence: true
   validates :minimum_number_of_hours, presence: true
   validates :description, presence: true
-  validates :space_pictures, length: {minimum: 3, message: "upload at least 3 pictures"}
 
   validate :validate_at_leat_1_category
   validate :validate_at_least_1_amenities
   validate :validate_at_least_1_day
   validate :validate_phone_10_digits
+  validate :validate_at_least_3_pictures
 
   scope :published, -> { joins(:subscription).where('subscriptions.valid_through > ?', DateTime.now) }
 
@@ -161,6 +161,12 @@ class Space < ActiveRecord::Base
     def validate_phone_10_digits
       if phone.present? && phone.gsub(/\D/,'').length != 10
         errors[:phone] << 'should have 10 digits (includes area code)'
+      end
+    end
+
+    def validate_at_least_3_pictures
+      if space_pictures.reject(&:marked_for_destruction?).length < 3
+        errors.add :space_pictures, 'upload at least 3 pictures'
       end
     end
 
