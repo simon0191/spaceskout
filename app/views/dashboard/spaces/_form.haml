@@ -61,12 +61,12 @@
       = f.text_field :zip_code, class: 'form-control'
       = render 'shared/forms/error', resource: space, field: :zip_code
 
-  .form-group.row{class: error_class(space, :phone)}
+  .form-group.row{class: error_class(space, :phone_number)}
     .col-md-3.text-right-md
-      = f.label :phone, 'Phone Number', class: 'required'
+      = f.label :phone_number, class: 'required'
     .col-md-6
-      = f.text_field :phone, class: 'form-control'
-      = render 'shared/forms/error', resource: space, field: :phone
+      = f.text_field :phone_number, class: 'form-control'
+      = render 'shared/forms/error', resource: space, field: :phone_number
 
   .form-group.row{class: error_class(space, :capacity)}
     .col-md-3.text-right-md
@@ -123,7 +123,7 @@
 
   .form-group.row{class: error_class(space, :weekdays_availability_from, :weekdays_availability_to)}
     .col-md-3.text-right-md
-      = f.label :weekdays_availability, class: 'required'
+      = f.label :weekday_availability, class: 'required'
     .col-md-3
       = f.select :weekdays_availability_from, hours_options, {include_blank: 'N/A'}, class: 'form-control'
       = render 'shared/forms/error', resource: space, field: :weekdays_availability_from
@@ -133,7 +133,7 @@
 
   .form-group.row{class: error_class(space, :weekend_availability_from, :weekend_availability_to)}
     .col-md-3.text-right-md
-      = f.label :weekdend_availability, class: 'required'
+      = f.label :weekend_availability, class: 'required'
     .col-md-3
       = f.select :weekend_availability_from, hours_options, {include_blank: 'N/A'}, class: 'form-control'
       = render 'shared/forms/error', resource: space, field: :weekend_availability_from

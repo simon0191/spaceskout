@@ -38,16 +38,16 @@
             .col-xs-12
               .pull-right
                 = link_to 'Login to contact the Owner', new_user_session_path, class: 'btn btn-secondary btn-lg'
-
         %section.row
           .col-xs-12
             %h3.text-primary Summary
-          .col-xs-6
+          .col-md-6.col-xs-12
             = render 'shared/info_table', info: { 'Space Type': @space.categories.pluck(:name).join(', '),
               'Classification': @space.classification.to_s.humanize,
               'Capacity': capacity_humanized(@space.capacity),
-              'Website': @space.website || 'N/A'}
-          .col-xs-6
+              'Website': @space.website || 'N/A',
+              'Location': "#{@space.full_address}, #{@space.city.name}, #{@space.city.state.name}"}
+          .col-md-6.col-xs-12
             = render 'shared/info_table', info: { 'Hourly Price': number_to_currency(@space.price_hourly, precision: 0),
               'Minimum # of Hours ': @space.minimum_number_of_hours,
               'Daily Price': number_to_currency(@space.price_daily, precision: 0),
@@ -69,10 +69,10 @@
         %hr/
 
         %section.row
-          .col-xs-6
+          .col-md-6.col-xs-12
             %h3.text-primary Availability
             = render 'shared/info_table', info: @space.formatted_availabilities
-          .col-xs-6
+          .col-md-6.col-xs-12
             %h3.text-primary Note
             %p
               = @space.special_note.present? ? @space.special_note : 'N/A'

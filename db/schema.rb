@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161130235220) do
+ActiveRecord::Schema.define(version: 20161202012105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,7 +159,7 @@ ActiveRecord::Schema.define(version: 20161130235220) do
     t.string   "address1"
     t.string   "address2"
     t.string   "zip_code"
-    t.string   "phone"
+    t.string   "phone_number"
     t.integer  "capacity"
     t.decimal  "rating",                     precision: 15, scale: 2, default: 0.0
     t.boolean  "published",                                           default: false
@@ -177,7 +177,7 @@ ActiveRecord::Schema.define(version: 20161130235220) do
     t.boolean  "white_board",                                         default: false
     t.boolean  "table_chair",                                         default: false
     t.boolean  "parking",                                             default: false
-    t.boolean  "phone_number",                                        default: false
+    t.boolean  "phone",                                               default: false
     t.boolean  "kitchen",                                             default: false
     t.boolean  "catering",                                            default: false
     t.integer  "weekdays_availability_from"

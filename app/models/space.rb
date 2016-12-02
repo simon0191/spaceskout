@@ -8,7 +8,7 @@
 #  address1                   :string
 #  address2                   :string
 #  zip_code                   :string
-#  phone                      :string
+#  phone_number               :string
 #  capacity                   :integer
 #  rating                     :decimal(15, 2)   default(0.0)
 #  published                  :boolean          default(FALSE)
@@ -26,7 +26,7 @@
 #  white_board                :boolean          default(FALSE)
 #  table_chair                :boolean          default(FALSE)
 #  parking                    :boolean          default(FALSE)
-#  phone_number               :boolean          default(FALSE)
+#  phone                      :boolean          default(FALSE)
 #  kitchen                    :boolean          default(FALSE)
 #  catering                   :boolean          default(FALSE)
 #  weekdays_availability_from :integer
@@ -85,7 +85,7 @@ class Space < ActiveRecord::Base
   scope :published, -> { joins(:subscription).where('subscriptions.valid_through > ?', DateTime.now) }
 
   def self.amenities
-    @amenities ||= [:wifi, :audio_visual, :projector, :white_board, :table_chair, :parking, :phone_number, :kitchen, :catering]
+    @amenities ||= [:wifi, :audio_visual, :projector, :white_board, :table_chair, :parking, :phone, :kitchen, :catering]
   end
 
   def self.days
@@ -98,6 +98,10 @@ class Space < ActiveRecord::Base
 
   def self.weekend_days
     @weekend_days ||=  [:saturday, :sunday]
+  end
+
+  def full_address
+    [address1, address2].reject(&:blank?).map(&:capitalize).join(', ')
   end
 
   def published?
