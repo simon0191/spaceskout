@@ -97,6 +97,11 @@
             - if @space.reviews.count > 0
               Rating:
               %img.img-responsive.rating.mb20{src: asset_url("rating-#{@space.rating.round}.png")}
+            - if user_signed_in?
+              = link_to 'Leave a review for this Space', new_space_review_path(@space), remote: true, class: 'btn btn-secondary mb20'
+            - else
+              = link_to 'Leave a review for this Space', new_space_review_path(@space), class: 'btn btn-secondary mb20'
+
             - if @space.reviews.count == 0
               %p.center-block This Space doesn't have reviews yet
             - @space.reviews.order('created_at DESC').each do |r|
@@ -107,7 +112,7 @@
                       = r.user.full_name
                       %img.img-responsive.rating{src: asset_url("rating-#{r.rating}.png")}
                     .col-xs-6.text-right.text-muted
-                      = l r.created_at, format: :short
+                      = l r.created_at, format: "%B %d"
                 .panel-body
                   = r.text
 

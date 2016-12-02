@@ -17,7 +17,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :spaces, only: [:index, :show]
+  resources :spaces, only: [:index, :show] do
+    resources :reviews, only: [:new, :create]
+  end
   resources :messages, only: [:create]
 
   namespace :dashboard do

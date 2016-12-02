@@ -1,0 +1,38 @@
+-# required: space, review
+= form_for [space, review], remote: true do |f|
+  .form-group{class: error_class(review, :rating)}
+    = f.label :rating
+    %div
+      - (1..5).each do |n|
+        .radio-rating
+          = f.label("rating_#{n}") do
+            %span.star.glyphicon.glyphicon-star-empty
+            = f.radio_button(:rating, n)
+      = render 'shared/forms/error', resource: review, field: :rating
+  .form-group{class: error_class(review, :text)}
+    = f.label :text, 'Review'
+    = f.text_area :text, class: 'form-control'
+    = render 'shared/forms/error', resource: review, field: :text
+  .text-right
+    = f.submit 'Publish Review', class: 'btn btn-primary'
+
+
+:javascript
+  var checked = $('.radio-rating input:checked');
+  if(checked.length !== 0) {
+    markStars(checked.val());
+  }
+  $('.radio-rating input').on('click', function(event) {
+    var input = $(event.target);
+    markStars(input.val());
+  });
+
+  function markStars(n) {
+    $('.radio-rating .glyphicon').
+      removeClass('glyphicon-star').
+      addClass('glyphicon-star-empty');
+
+    $('.radio-rating .glyphicon:lt(' + n + ')').
+      removeClass('glyphicon-star-empty').
+      addClass('glyphicon-star');
+  }

@@ -1,0 +1,11 @@
+-# required: space, review, id
+.modal.fade{id: id}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{type: 'button', 'data-dismiss': 'modal'}
+          %span
+            &times;
+        %h4 Review
+      .modal-body
+        = render 'form', space: space, review: review

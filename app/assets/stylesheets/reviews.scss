@@ -1,0 +1,10 @@
+.radio-rating {
+  width: auto;
+  display: inline;
+  .star {
+    display: block;
+    &.glyphicon-star {
+      color: $brand-primary;
+    }
+  }
+}

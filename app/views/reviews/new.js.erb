@@ -1,0 +1,11 @@
+<% modal_id = "review-form-modal" %>
+
+var modal = $('<%= j render "form_modal", id: modal_id, space: @space, review: Review.new %>');
+
+modal.on('hidden.bs.modal', function() {
+  modal.remove();
+});
+
+$('body').append(modal);
+
+modal.modal('show');

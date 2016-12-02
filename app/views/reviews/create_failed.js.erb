@@ -1,0 +1,4 @@
+<% modal_id = "review-form-modal" %>
+
+var modal = $('#<%= modal_id %>');
+modal.find('.modal-body').html('<%= j render "form", space: @space, review: @review %>');
