@@ -13,4 +13,7 @@
             %li{class: params[:controller] == 'dashboard/spaces' ? 'active' : ''}
               = link_to 'Your Spaces', dashboard_spaces_path
           %li{class: params[:controller] == 'dashboard/messages' ? 'active' : ''}
-            = link_to 'Inbox', dashboard_messages_path
+            = link_to dashboard_messages_path do
+              Inbox
+              - if current_user.unread_inbox_count > 0
+                %span.badge.inbox-unread-count= current_user.unread_inbox_count

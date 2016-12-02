@@ -13,3 +13,10 @@ $('body').append(modal);
 modal.modal('show');
 //Mark conversation as read
 $("#conversation-<%= @conversation.id %>").removeClass('info')
+
+//Update unread count
+  <% if current_user.unread_inbox_count == 0 %>
+    $(".inbox-unread-count").remove()
+  <% else %>
+    $(".inbox-unread-count").text('<%= current_user.unread_inbox_count %>')
+  <% end %>

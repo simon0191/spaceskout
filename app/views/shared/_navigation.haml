@@ -15,9 +15,18 @@
         - unless user_signed_in? && current_user.has_access_level?(:space_owner)
           %li= link_to 'Your Space Here', your_space_here_pages_path
         - if user_signed_in? && current_user.class == SpaceOwner
-          %li= link_to 'Profile', edit_space_owner_registration_path
+          %li
+            = link_to edit_space_owner_registration_path do
+              Profile
+              - if current_user.unread_inbox_count > 0
+                %span.badge.inbox-unread-count= current_user.unread_inbox_count
         - elsif user_signed_in? && current_user.class == Customer
-          %li= link_to 'Profile', edit_customer_registration_path
+          %li
+            = link_to edit_customer_registration_path do
+              Profile
+              - if current_user.unread_inbox_count > 0
+                %span.badge= current_user.unread_inbox_count
+
         - if user_signed_in? && current_user.has_access_level?(:space_owner)
           %li= link_to 'List Your Space', new_dashboard_space_path
         - if user_signed_in?
