@@ -15,21 +15,25 @@ class Subscriptions::ChargeAndCreateForm < BaseForm
       valid_through: DateTime.now + plan.duration_in_days.days,
       available_publications: plan.number_of_publications
     )
-
-    response = Stripe::Charge.create(
-      amount: subscription.amount_paid_in_cents,
-      currency: "usd",
-      source: stripe_token,
-      description: "Subscription to SpaceSkout #{plan.name.capitalize} plan"
-    )
-    if response.status == 'succeeded'
-      subscription.stripe_charge_id = response.id
+    if subscription.amount_paid <= 0
       subscription.save!
       true
     else
-      errors[:charge] << "wasn't successful"
-      errors[:charge] << response.failure_message
-      false
+      response = Stripe::Charge.create(
+        amount: subscription.amount_paid_in_cents,
+        currency: "usd",
+        source: stripe_token,
+        description: "Subscription to SpaceSkout #{plan.name.capitalize} plan"
+      )
+      if response.status == 'succeeded'
+        subscription.stripe_charge_id = response.id
+        subscription.save!
+        true
+      else
+        errors[:charge] << "wasn't successful"
+        errors[:charge] << response.failure_message
+        false
+      end
     end
   end
 

@@ -47,4 +47,5 @@ silver = Plan.create!(name: 'Silver', number_of_publications: 2, price: 525.0, d
 gold = Plan.create!(name: 'Gold', number_of_publications: 5, price: 1290.0, duration_in_days: 365)
 
 Coupon.create!(code: 'BASIC50OFF', plan: basic, coupon_type: :discount_percentage, discount: 50.0)
+Coupon.create!(code: 'BASIC100', plan: basic, coupon_type: :discount_percentage, discount: 100.0)
 Coupon.create!(code: '10OFF', coupon_type: :discount_percentage, discount: 50.0)
