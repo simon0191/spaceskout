@@ -16,6 +16,14 @@ module ApplicationHelper
     end
   end
 
+  def available_city_options
+    City.available.includes(:state).reduce({}) do |h, city|
+      h[city.state.name] ||= []
+      h[city.state.name] << [city.name, city.id]
+      h
+    end
+  end
+
   def capacity_options
     Space.capacities.keys.map{ |c| [capacity_humanized(c), c] }
   end

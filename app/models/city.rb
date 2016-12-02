@@ -15,4 +15,5 @@ class City < ActiveRecord::Base
   has_many :spaces
 
   scope :active, -> { joins(:state).where(active: true, 'states.active': true) }
+  scope :available, -> { active.joins(:spaces).uniq }
 end

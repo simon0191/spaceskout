@@ -7,7 +7,7 @@
             .col-md-3.text-right-md
               = label_tag :city_id, 'Location'
             .col-md-9.text-left
-              = select_tag :city_id, grouped_options_for_select(city_options, params[:city_id]), class: 'form-control', prompt: 'Select a city', 'data-selectize-simple': true
+              = select_tag :city_id, grouped_options_for_select(available_city_options, params[:city_id]), class: 'form-control', prompt: 'Select a city', 'data-selectize-simple': true
               %small.text-muted
                 %span.text-danger *
                 Only serving cities in Northern California
