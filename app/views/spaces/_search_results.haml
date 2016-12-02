@@ -1,5 +1,7 @@
 .results-container
   .row
+    = paginate spaces
+  .row
     - spaces.each do |space|
       .col-md-4
         .space-card.shadow-border

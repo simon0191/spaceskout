@@ -3,7 +3,7 @@ class Dashboard::SpacesController < Dashboard::BaseController
   before_action :only_space_owners!
 
   def index
-    @spaces = current_user.spaces
+    @spaces = current_user.spaces.order('created_at DESC').page(params[:page])
   end
 
   def new

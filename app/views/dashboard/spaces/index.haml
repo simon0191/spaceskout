@@ -8,6 +8,7 @@
       Available posts: #{current_user.available_posts}
   .row
     .col-xs-12
+      = paginate @spaces
       .table-responsive
         %table.table
           %thead
@@ -18,7 +19,7 @@
               %th Hourly Price
               %th Rating
           %tbody
-            - @spaces.order('created_at DESC').each do |space|
+            - @spaces.each do |space|
               %tr
                 %td= link_to space.name, space_path(space.id)
                 %td= space.classification.to_s.humanize
@@ -41,3 +42,4 @@
                     = link_to 'Publish', dashboard_plans_path, class: 'btn btn-primary'
                 %td
                   = link_to 'Edit', edit_dashboard_space_path(space.id), class: 'btn btn-info'
+        = paginate @spaces
