@@ -8,4 +8,10 @@ class Dashboard::BaseController < ApplicationController
         redirect_to root_path, error: 'Access not allowed'
       end
     end
+
+    def only_admin!
+      unless current_user.has_access_level?(:admin)
+        redirect_to root_path, error: 'Access not allowed'
+      end
+    end
 end

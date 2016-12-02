@@ -18,3 +18,7 @@
               Inbox
               - if current_user.unread_inbox_count > 0
                 %span.badge.inbox-unread-count= current_user.unread_inbox_count
+          -# Admin
+          - if current_user.has_access_level?(:admin)
+            %li{class: params[:controller] == 'dashboard/charities' ? 'active' : ''}
+              = link_to 'Featured Charity', edit_dashboard_charity_path

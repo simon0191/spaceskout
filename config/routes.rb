@@ -42,6 +42,7 @@ Rails.application.routes.draw do
         post :reply
       end
     end
+    resource :charity, only: [:edit, :update]
   end
 
 end
