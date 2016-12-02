@@ -5,9 +5,9 @@ class Dashboard::SpacesController < Dashboard::BaseController
 
   def index
     if current_user.has_access_level?(:admin)
-      @spaces = Space.order('created_at DESC').page(params[:page])
+      @spaces = Space.order('created_at DESC').includes(:subscription, :user).page(params[:page])
     else
-      @spaces = current_user.spaces.order('created_at DESC').page(params[:page])
+      @spaces = current_user.spaces.order('created_at DESC').includes(:subscription, :user).page(params[:page])
     end
   end
 

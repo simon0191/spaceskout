@@ -24,7 +24,7 @@
             - @spaces.each do |space|
               %tr
                 - if current_user.has_access_level?(:admin)
-                  %td #{space.owner.full_name}, #{space.owner.email}
+                  %td= [space.owner.try(:full_name), space.owner.try(:email)].reject(&:blank?).join(', ')
                 %td= link_to space.name, space_path(space.id)
                 %td= space.classification.to_s.humanize
                 %td= space.address
