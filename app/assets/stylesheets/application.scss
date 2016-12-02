@@ -47,12 +47,30 @@ html, body {
   }
 }
 
-@each $size in (0, 2, 5, 10, 15, 20, 25, 30, 40, 50) {
+$locations: (
+  top:    't',
+  right:  'r',
+  bottom: 'b',
+  left:   'l'
+);
+$sizes: 0, 2, 5, 10, 15, 20, 25, 30, 40, 50;
+@each $size in $sizes {
   .p#{$size} {
     padding: #{$size}px;
   }
   .m#{$size} {
     margin: #{$size}px;
+  }
+}
+
+@each $size in $sizes {
+  @each $location, $alias in $locations {
+    .p#{$alias}#{$size} {
+      padding-#{$location}: #{$size}px;
+    }
+    .m#{map-get($locations, $location)}#{$size} {
+      margin-#{$location}: #{$size}px;
+    }
   }
 }
 
@@ -63,4 +81,17 @@ html, body {
 .shadow-border {
   border: 1px solid #cccccc;
   box-shadow: 0 0 5px rgba(0,0,0,0.13);
+}
+
+.modal-scrollable {
+  .modal-dialog {
+    overflow-y: initial !important
+  }
+  .modal-body {
+    max-height: 250px;
+    @media (min-width: $screen-md) {
+      max-height: 400px;
+    }
+    overflow-y: auto;
+  }
 }

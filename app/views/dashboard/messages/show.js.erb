@@ -1,0 +1,15 @@
+<% modal_id = "conversation-modal-#{@conversation.id}" %>
+
+var modal = $('<%= j render "conversation", modal_id: modal_id, conversation: @conversation %>', {
+  id: '<%= modal_id %>'
+});
+
+modal.on('hidden.bs.modal', function() {
+  modal.remove();
+});
+
+$('body').append(modal);
+
+modal.modal('show');
+//Mark conversation as read
+$("#conversation-<%= @conversation.id %>").removeClass('info')

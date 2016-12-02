@@ -1,5 +1,5 @@
 class Dashboard::SubscriptionsController < Dashboard::BaseController
-
+  before_action :only_space_owners!
   def new
     @plan = Plan.find(params[:plan_id])
   end

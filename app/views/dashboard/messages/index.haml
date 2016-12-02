@@ -1,0 +1,28 @@
+= render 'dashboard/shared/navigation'
+.container
+  .row
+    .col-xs-12
+      %h2 Messages
+      = paginate @conversations
+      - if @conversations.empty?
+        %p.text-center.text-muted.center-block
+          No messages found
+      - else
+        .table-responsive
+          %table.table.table-hover
+            %thead
+              %tr
+                %th # Messages
+                %th Subject
+                %th Date
+            %tbody
+              - @conversations.each do |c|
+                %tr{id: "conversation-#{c.id}", class: c.is_unread?(current_user) ? 'info' : ''}
+                  %td
+                    = c.count_messages
+                  %td
+                    = link_to c.subject, dashboard_message_path(c.id), remote: true
+                  %td
+                    = c.updated_at
+      = paginate @conversations
+

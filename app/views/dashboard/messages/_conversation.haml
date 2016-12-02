@@ -1,0 +1,25 @@
+-# required: modal_id, conversation
+.modal.modal-scrollable.fade{id: modal_id}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h4
+          = conversation.subject
+        %button.close{type: 'button', 'data-dismiss': 'modal'}
+          %span
+            &times;
+      .modal-body{style: 'overflow: scroll;'}
+        - conversation.receipts_for(current_user).each do |receipt|
+          - m = receipt.message
+          .panel.panel-default{class: m.sender == current_user ? 'mr50' : 'ml50'}
+            .panel-heading
+              %p
+                %strong= m.sender.full_name
+                %small.pull-right= m.created_at
+            .panel-body
+              = m.body
+      .modal-footer
+        = form_for :reply, url: reply_dashboard_message_path do |f|
+          = f.text_area :body, class: 'form-control', placeholder: 'Reply...', required: true
+          .m5.text-right
+            = f.submit 'Reply', class: 'btn btn-secondary'

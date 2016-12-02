@@ -34,6 +34,11 @@ Rails.application.routes.draw do
       resources :subscriptions, only: [:new, :create] do
       end
     end
+    resources :messages, only: [:index, :show] do
+      member do
+        post :reply
+      end
+    end
   end
 
 end

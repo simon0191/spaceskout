@@ -1,5 +1,6 @@
 class Dashboard::SpacesController < Dashboard::BaseController
   before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
+  before_action :only_space_owners!
 
   def index
     @spaces = current_user.spaces

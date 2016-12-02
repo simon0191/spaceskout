@@ -1,4 +1,5 @@
 class Dashboard::PlansController < Dashboard::BaseController
+  before_action :only_space_owners!
 
   def index
     @plans = Plan.all
