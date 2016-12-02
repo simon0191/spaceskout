@@ -1,9 +1,14 @@
 class Dashboard::SpacesController < Dashboard::BaseController
   before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
   before_action :only_space_owners!
+  before_action :set_space, only: [:edit, :update, :publish]
 
   def index
-    @spaces = current_user.spaces.order('created_at DESC').page(params[:page])
+    if current_user.has_access_level?(:admin)
+      @spaces = Space.order('created_at DESC').page(params[:page])
+    else
+      @spaces = current_user.spaces.order('created_at DESC').page(params[:page])
+    end
   end
 
   def new
@@ -23,11 +28,9 @@ class Dashboard::SpacesController < Dashboard::BaseController
   end
 
   def edit
-    @space = current_user.spaces.find(params[:id])
   end
 
   def update
-    @space = current_user.spaces.find(params[:id])
     if @space.update(space_params)
       redirect_to dashboard_spaces_path, notice: 'Space has been updated successfully'
     else
@@ -39,8 +42,7 @@ class Dashboard::SpacesController < Dashboard::BaseController
   end
 
   def publish
-    space = current_user.spaces.find(params[:id])
-    publish_form = Spaces::PublishForm.new(user: current_user, space: space)
+    publish_form = Spaces::PublishForm.new(user: @space.owner, space: @space)
     if publish_form.save!
       flash[:notice] = 'Space published'
       redirect_to dashboard_spaces_path
@@ -78,6 +80,14 @@ class Dashboard::SpacesController < Dashboard::BaseController
         acl: 'public-read'
       )
       puts @s3_direct_post.fields
+    end
+
+    def set_space
+      if current_user.has_access_level?(:admin)
+        @space = Space.find(params[:id])
+      else
+        @space = current_user.spaces.find(params[:id])
+      end
     end
 end
 

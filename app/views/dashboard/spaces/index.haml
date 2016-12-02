@@ -13,6 +13,8 @@
         %table.table
           %thead
             %tr
+              - if current_user.has_access_level?(:admin)
+                %th Owner
               %th Name
               %th Classification
               %th Address
@@ -21,6 +23,8 @@
           %tbody
             - @spaces.each do |space|
               %tr
+                - if current_user.has_access_level?(:admin)
+                  %td #{space.owner.full_name}, #{space.owner.email}
                 %td= link_to space.name, space_path(space.id)
                 %td= space.classification.to_s.humanize
                 %td= space.address
