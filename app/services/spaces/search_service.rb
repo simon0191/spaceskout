@@ -21,7 +21,7 @@ class Spaces::SearchService
   end
 
   def search(spaces=Space.all)
-    spaces = spaces.where(classification: classification) if classification.present?
+    spaces = spaces.where(classification: Space.classifications[classification]) if classification.present?
     spaces = spaces.where(city_id: city_id) if city_id.present?
     spaces = filter_by_ratings(spaces, ratings) if ratings.present? && ratings.any?
     spaces = spaces.where(':min <= price_hourly AND price_hourly <= :max', min: price_hourly_min, max: price_hourly_max) if price_hourly_range.present?
