@@ -1,2 +1,48 @@
-%h1 Have an Event Space to Share?
-%h2 Publish your Space on SpaceSkout
+= image_tag("your-space-here/publish-banner.jpg", class: 'image-responsive full-width')
+.container
+  %section
+    .row
+      .col-md-6.col-md-offset-3.col-xs-12.text-center
+        %h1 Have an Event Space to Share?
+        %h3 Publish your Space on SpaceSkout
+        = image_tag("your-space-here/benefits.png")
+        .center-block
+          %ul
+            %li Get your space in front of thousands of Bay Area community members.
+            %li More traffic to your website and more exposure for your organization.
+            %li A seamless way to increase your bookings and generate new leads.
+  %hr/
+  %section
+    .row
+      .col-xs-12.text-center
+        %h1 3 Easy Steps
+        .pl50.pr50
+          .row
+            .col-md-4.col-xs-12
+              = image_tag("your-space-here/step-1-signup.png", class: 'img-responsive center-block')
+              %strong Sign up
+              for an annual plan that suits your budget and needs
+
+            .col-md-4.col-xs-12
+              = image_tag("your-space-here/step-2-receive-inquiries.png", class: 'img-responsive center-block')
+              %strong Receive inquiries
+              from members looking to organize their events
+
+            .col-md-4.col-xs-12
+              = image_tag("your-space-here/step-3-view-and-book.png", class: 'img-responsive center-block')
+              Set up
+              %strong a viewing and book
+              \&nbsp;
+              directly with space seekers per your own terms
+            .clearfix
+            .col-xs-12.text-center.mt30.mb30
+              = link_to "Get Started", new_space_owner_registration_path, class: 'btn btn-primary btn-lg'
+  %hr/
+  %section
+    .row
+      .col-xs-12.col-md-6.col-md-offset-3.text-center
+        %h1 Community GiveBack Program
+        %p
+          By partnering with us, 10% of proceeds collected from each annual subscription will automatically be donated to a featured charity.
+      .col-xs-12.text-center.mt30.mb30
+        = link_to "LEARN MORE", community_giveback_pages_path, class: 'btn btn-primary btn-lg'

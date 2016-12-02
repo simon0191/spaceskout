@@ -32,6 +32,10 @@ html, body {
   height: calc(100% - #{$navbar-height});
 }
 
+.full-width {
+  width: 100%;
+}
+
 .col-centered {
   float: none;
   margin: 0 auto;
