@@ -232,6 +232,7 @@ GEM
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    selectize-rails (0.12.4)
     sexp_processor (4.7.0)
     sidekiq (4.2.7)
       concurrent-ruby (~> 1.0)
@@ -306,6 +307,7 @@ DEPENDENCIES
   rmagick (~> 2.16.0)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  selectize-rails (~> 0.12.4)
   sidekiq (~> 4.2.7)
   simple_form (~> 3.3.1)
   spring

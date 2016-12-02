@@ -7,12 +7,12 @@
       = label_tag :classification
       = select_tag :classification,
                   options_for_select(classification_options, search_form.classification),
-                  {prompt: 'Select Classification', class: 'form-control'}
+                  {prompt: 'Select Classification', class: 'form-control', 'data-selectize-simple': true}
     .form-group
       = label_tag :city
       = select_tag :city_id,
                   grouped_options_for_select(city_options, search_form.city_id),
-                  {prompt: 'Select City', class: 'form-control'}
+                  {prompt: 'Select City', class: 'form-control', 'data-selectize-simple': true}
 
     = submit_tag "Search" , class: "btn btn-secondary"
 

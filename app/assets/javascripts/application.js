@@ -17,4 +17,5 @@
 //= require turbolinks
 //= require nested_form_fields
 //= require bootstrap-slider
+//= require selectize
 //= require_tree .
