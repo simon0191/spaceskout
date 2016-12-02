@@ -42,6 +42,10 @@ class User < ActiveRecord::Base
     [:customer].include?(role.to_sym)
   end
 
+  def has_reviewed_space?(space)
+    space.reviews.where(user_id: self.id).count > 0
+  end
+
   def available_posts
     subscriptions.not_expired.sum(:available_publications)
   end

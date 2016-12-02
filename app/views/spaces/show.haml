@@ -97,9 +97,9 @@
             - if @space.reviews.count > 0
               Rating:
               %img.img-responsive.rating.mb20{src: asset_url("rating-#{@space.rating.round}.png")}
-            - if user_signed_in?
+            - if user_signed_in? && current_user != @space.owner && !current_user.has_reviewed_space?(@space)
               = link_to 'Leave a review for this Space', new_space_review_path(@space), remote: true, class: 'btn btn-secondary mb20'
-            - else
+            - elsif !user_signed_in?
               = link_to 'Leave a review for this Space', new_space_review_path(@space), class: 'btn btn-secondary mb20'
 
             - if @space.reviews.count == 0

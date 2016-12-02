@@ -16,8 +16,10 @@ class Review < ActiveRecord::Base
   belongs_to :space
 
   validates :rating, presence: true
-  validates :user, presence: true
+  validates :user, presence: true, uniqueness: {scope: :space_id}
   validates :space, presence: true
+
+  validate :validate_user_is_not_owner
 
   after_create :update_space_rating
 
@@ -25,5 +27,11 @@ class Review < ActiveRecord::Base
 
     def update_space_rating
       space.update_rating!
+    end
+
+    def validate_user_is_not_owner
+      if user.present? && space.present? && user == space.owner
+        errrors[:user] << "can't be the owner of the space"
+      end
     end
 end
