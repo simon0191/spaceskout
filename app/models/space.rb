@@ -54,7 +54,7 @@ class Space < ActiveRecord::Base
   alias_method :owner, :user
   belongs_to :subscription
   has_many :categories, through: :space_categories
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   has_many :space_categories, dependent: :destroy
   has_many :space_pictures, dependent: :destroy
 
