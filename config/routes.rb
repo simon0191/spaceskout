@@ -30,7 +30,7 @@ Rails.application.routes.draw do
         patch :publish
       end
     end
-    resources :plans, only: [:index] do
+    resources :plans, only: [:index, :edit, :update] do
       member do
         get :validate_coupon
       end

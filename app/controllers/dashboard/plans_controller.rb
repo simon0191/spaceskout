@@ -1,8 +1,22 @@
 class Dashboard::PlansController < Dashboard::BaseController
   before_action :only_space_owners!
+  before_action :only_admins!, only: [:edit, :update]
 
   def index
     @plans = Plan.all
+  end
+
+  def edit
+    @plan = Plan.find(params[:id])
+  end
+
+  def update
+    @plan = Plan.find(params[:id])
+    if @plan.update(plan_params)
+      redirect_to dashboard_plans_path, notice: 'Plan updated'
+    else
+      render :edit
+    end
   end
 
   def validate_coupon
@@ -15,4 +29,10 @@ class Dashboard::PlansController < Dashboard::BaseController
       render :invalid_coupon
     end
   end
+
+  private
+
+    def plan_params
+      params.require(:plan).permit(:name, :number_of_publications, :price)
+    end
 end

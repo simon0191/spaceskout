@@ -22,3 +22,5 @@
           - if current_user.has_access_level?(:admin)
             %li{class: params[:controller] == 'dashboard/charities' ? 'active' : ''}
               = link_to 'Featured Charity', edit_dashboard_charity_path
+            %li{class: params[:controller] == 'dashboard/plans' ? 'active' : ''}
+              = link_to 'Plans', dashboard_plans_path

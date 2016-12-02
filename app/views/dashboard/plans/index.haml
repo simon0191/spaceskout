@@ -11,6 +11,8 @@
                 = pluralize(plan.number_of_publications, 'Posting')
               .additional-info
                 = plan.additional_info.try(:html_safe)
+            - if current_user.has_access_level?(:admin)
+              = link_to 'Edit', edit_dashboard_plan_path(plan), class: 'btn btn-danger'
             %button.btn.btn-success.btn-block{type: 'button', 'data-toggle': 'modal', 'data-target': "#coupon-modal-#{plan.id}"}
               Select!
             .modal.fade{id: "coupon-modal-#{plan.id}"}

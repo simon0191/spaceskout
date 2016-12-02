@@ -1,5 +1,5 @@
 class Dashboard::CharitiesController < Dashboard::BaseController
-  before_action :only_admin!
+  before_action :only_admins!
   before_action :set_charity
 
   def edit
