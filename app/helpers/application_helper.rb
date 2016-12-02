@@ -47,4 +47,13 @@ module ApplicationHelper
       more_1000: '> 1000'
     }[capacity.to_sym]
   end
+
+  def panel_class_for_rating(rating)
+    case rating
+      when 0..2 then 'panel-danger'
+      when 3    then 'panel-default'
+      when 4..5 then 'panel-success'
+      else           'panel-default'
+    end
+  end
 end

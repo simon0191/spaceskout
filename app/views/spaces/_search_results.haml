@@ -8,8 +8,8 @@
           .space-info.text-center
             = link_to("#{space.name} / #{space.city.try(:name)}", space_path(space.id) )
             %p= "(#{space.classification.to_s.humanize})"
-            %img.img-responsive.rating.center-block{src: asset_url("rating-#{space.rating.floor}.png")}
-            = "#{pluralize(space.ratings.count,'Review')}"
+            %img.img-responsive.rating.center-block{src: asset_url("rating-#{space.rating.round}.png")}
+            = "#{pluralize(space.reviews.count,'Review')}"
             %p
               %span.price
                 = "$#{space.price_hourly}"

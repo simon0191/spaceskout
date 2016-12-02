@@ -41,6 +41,10 @@
         %section.row
           .col-xs-12
             %h3.text-primary Summary
+            - if @space.reviews.count > 0
+              Rating:
+              %img.img-responsive.rating.mb20{src: asset_url("rating-#{@space.rating.round}.png")}
+
           .col-md-6.col-xs-12
             = render 'shared/info_table', info: { 'Space Type': @space.categories.pluck(:name).join(', '),
               'Classification': @space.classification.to_s.humanize,
@@ -85,4 +89,26 @@
           .col-xs-12
             %h3.text-primary Organization Description
             = @space.organization_description.present? ? @space.organization_description : 'N/A'
+
+        %section.row
+          .col-xs-12
+            %h3.text-primary
+              Reviews
+            - if @space.reviews.count > 0
+              Rating:
+              %img.img-responsive.rating.mb20{src: asset_url("rating-#{@space.rating.round}.png")}
+            - if @space.reviews.count == 0
+              %p.center-block This Space doesn't have reviews yet
+            - @space.reviews.order('created_at DESC').each do |r|
+              .panel{class: panel_class_for_rating(r.rating)}
+                .panel-heading
+                  .row
+                    .col-xs-6
+                      = r.user.full_name
+                      %img.img-responsive.rating{src: asset_url("rating-#{r.rating}.png")}
+                    .col-xs-6.text-right.text-muted
+                      = l r.created_at, format: :short
+                .panel-body
+                  = r.text
+
 

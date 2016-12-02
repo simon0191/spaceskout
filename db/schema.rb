@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161202012105) do
+ActiveRecord::Schema.define(version: 20161202150225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,16 +120,17 @@ ActiveRecord::Schema.define(version: 20161202012105) do
     t.text     "additional_info"
   end
 
-  create_table "ratings", force: :cascade do |t|
-    t.integer  "stars",      default: 0
-    t.integer  "space_id"
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "rating"
+    t.string   "text"
     t.integer  "user_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "space_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "ratings", ["space_id"], name: "index_ratings_on_space_id", using: :btree
-  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
+  add_index "reviews", ["space_id"], name: "index_reviews_on_space_id", using: :btree
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
 
   create_table "space_categories", force: :cascade do |t|
     t.integer  "category_id"
@@ -259,8 +260,8 @@ ActiveRecord::Schema.define(version: 20161202012105) do
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
-  add_foreign_key "ratings", "spaces"
-  add_foreign_key "ratings", "users"
+  add_foreign_key "reviews", "spaces"
+  add_foreign_key "reviews", "users"
   add_foreign_key "space_categories", "categories"
   add_foreign_key "space_categories", "spaces"
   add_foreign_key "space_pictures", "spaces"

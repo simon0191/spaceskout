@@ -54,7 +54,7 @@ class Space < ActiveRecord::Base
   alias_method :owner, :user
   belongs_to :subscription
   has_many :categories, through: :space_categories
-  has_many :ratings
+  has_many :reviews
   has_many :space_categories, dependent: :destroy
   has_many :space_pictures, dependent: :destroy
 
@@ -98,6 +98,10 @@ class Space < ActiveRecord::Base
 
   def self.weekend_days
     @weekend_days ||=  [:saturday, :sunday]
+  end
+
+  def update_rating!
+    self.update_column(:rating, reviews.average(:rating) || 0)
   end
 
   def full_address
