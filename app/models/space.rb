@@ -55,7 +55,7 @@ class Space < ActiveRecord::Base
   belongs_to :subscription
   has_many :categories, through: :space_categories
   has_many :ratings
-  has_many :space_categories
+  has_many :space_categories, dependent: :destroy
   has_many :space_pictures, dependent: :destroy
 
   accepts_nested_attributes_for :space_pictures, allow_destroy: true
