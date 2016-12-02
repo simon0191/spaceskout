@@ -18,13 +18,18 @@
               %th Hourly Price
               %th Rating
           %tbody
-            - @spaces.each do |space|
+            - @spaces.order('created_at DESC').each do |space|
               %tr
                 %td= link_to space.name, space_path(space.id)
                 %td= space.classification.to_s.humanize
                 %td= space.address
                 %td= number_to_currency(space.price_hourly, precision: 0)
-                %td= space.rating
+                %td
+                  - if space.reviews.count > 0
+                    = space.rating.round(2)
+                    %img.img-responsive.rating{src: asset_url("rating-#{space.rating.round}.png")}
+                  - else
+                    Not yet rated
                 %td
                   - if space.published?
                     .label.label-success
