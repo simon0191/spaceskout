@@ -3,9 +3,14 @@
     .col-xs-12
       .m20
         %ul.nav.nav-tabs
-          %li{class: params[:controller] == 'dashboard/spaces' ? 'active' : ''}
-            = link_to 'Your Spaces', dashboard_spaces_path
-          %li{class: params[:controller] == 'space_owners/registrations' ? 'active' : ''}
-            = link_to 'Profile', edit_space_owner_registration_path
-          /%li{class: params[:controller] == 'dashboard/messages' ? 'active' : ''}
-          /= link_to 'Inbox', dashboard_messages_path
+          - if current_user.class == SpaceOwner
+            %li{class: params[:controller] == 'space_owners/registrations' ? 'active' : ''}
+              = link_to 'Profile', edit_space_owner_registration_path
+          - elsif current_user.class == Customer
+            %li{class: params[:controller] == 'customers/registrations' ? 'active' : ''}
+              = link_to 'Profile', edit_customer_registration_path
+          - if current_user.has_access_level?(:space_owner)
+            %li{class: params[:controller] == 'dashboard/spaces' ? 'active' : ''}
+              = link_to 'Your Spaces', dashboard_spaces_path
+          %li{class: params[:controller] == 'dashboard/messages' ? 'active' : ''}
+            = link_to 'Inbox', dashboard_messages_path

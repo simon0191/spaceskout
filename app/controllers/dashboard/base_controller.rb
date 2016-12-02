@@ -1,6 +1,5 @@
 class Dashboard::BaseController < ApplicationController
   before_action :authenticate_user!
-  before_action :only_space_owners!
 
   private
 

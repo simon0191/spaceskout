@@ -1,0 +1,56 @@
+= render 'dashboard/shared/navigation'
+%section.registration-form
+  .container
+    .row
+      .col-xs-12.col-md-8.col-centered
+        .form-wrapper
+          %h3 Your Profile
+          - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+            .alert.alert-warning
+              Currently waiting confirmation for: #{resource.unconfirmed_email}
+          %hr/
+          = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, class: 'ss-form', multipart: true}) do |f|
+            .row
+              .col-xs-6.form-group{class: error_class(resource, :first_name)}
+                = f.label :first_name, class: 'required'
+                = f.text_field :first_name, class: 'form-control'
+                = render 'shared/forms/error', resource: resource, field: :first_name
+
+              .col-xs-6.form-group{class: error_class(resource, :last_name)}
+                = f.label :last_name, class: 'required'
+                = f.text_field :last_name, class: 'form-control'
+                = render 'shared/forms/error', resource: resource, field: :last_name
+
+            .form-group{class: error_class(resource, :phone)}
+              = f.label :phone
+              = f.telephone_field :phone, class: 'form-control'
+              = render 'shared/forms/error', resource: resource, field: :phone
+
+            .form-group{class: error_class(resource, :avatar)}
+              = f.label :avatar
+              = image_tag(resource.avatar.thumb.url) if resource.avatar?
+              = f.file_field :avatar, class: 'form-control'
+              = f.hidden_field :avatar_cache
+              = render 'shared/forms/error', resource: resource, field: :avatar
+
+            .form-group{class: error_class(resource, :current_password)}
+              = f.label :current_password, class: 'required'
+              %i.text-muted (we need your current password to confirm your changes)
+              = f.password_field :current_password, class: 'form-control'
+              = render 'shared/forms/error', resource: resource, field: :current_password
+
+            %hr/
+            .form-group{class: error_class(resource, :password)}
+              = f.label :password, 'New password', class: 'required'
+              %i.text-muted (leave blank if you don't want to change it)
+              = f.password_field :password, class: 'form-control'
+              = render 'shared/forms/error', resource: resource, field: :password
+
+            .form-group{class: error_class(resource, :password_confirmation)}
+              = f.label :password, 'Confirm new password', class: 'required'
+              %i.text-muted (leave blank if you don't want to change it)
+              = f.password_field :password_confirmation, class: 'form-control'
+              = render 'shared/forms/error', resource: resource, field: :password_confirmation
+
+            .text-right
+              = f.submit 'UPDATE PROFILE', class: 'btn btn-primary'
