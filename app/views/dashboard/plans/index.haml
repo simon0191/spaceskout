@@ -9,6 +9,8 @@
             .plan-box-content.full-height-flex
               %p.text-center
                 = pluralize(plan.number_of_publications, 'Posting')
+              %p.text-center
+                = number_to_currency(plan.price, precision: 0)
               .additional-info
                 = plan.additional_info.try(:html_safe)
             - if current_user.has_access_level?(:admin)
@@ -25,10 +27,12 @@
                     %h4 Promo Code
                   .modal-body
   .row
+    .col-xs-12.col-md-8.col-md-offset-2.text-center
+      Receive 25% discount on Silver and Gold packages
+  .row
     .col-xs-12.col-md-8.col-md-offset-2
       .text-center.text-muted.p50
         %p 10+ please contact #{mail_to 'info@spaceskout.com'}
-
         %p * 1 year expiration date from date of purchase
         %p * 30 day exchange policy
 

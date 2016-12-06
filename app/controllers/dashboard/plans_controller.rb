@@ -3,7 +3,7 @@ class Dashboard::PlansController < Dashboard::BaseController
   before_action :only_admins!, only: [:edit, :update]
 
   def index
-    @plans = Plan.all
+    @plans = Plan.all.order(:order)
   end
 
   def edit
@@ -33,6 +33,6 @@ class Dashboard::PlansController < Dashboard::BaseController
   private
 
     def plan_params
-      params.require(:plan).permit(:name, :number_of_publications, :price)
+      params.require(:plan).permit(:name, :number_of_publications, :price, :order)
     end
 end

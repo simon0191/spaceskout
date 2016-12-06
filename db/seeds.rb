@@ -42,9 +42,9 @@ Charity.create(
   featured: true
 )
 
-basic = Plan.create!(name: 'Basic', number_of_publications: 1, price: 350.0, duration_in_days: 365)
-silver = Plan.create!(name: 'Silver', number_of_publications: 2, price: 525.0, duration_in_days: 365)
-gold = Plan.create!(name: 'Gold', number_of_publications: 5, price: 1290.0, duration_in_days: 365)
+basic = Plan.create!(name: 'Basic', number_of_publications: 1, price: 350.0, duration_in_days: 365, order: 1)
+silver = Plan.create!(name: 'Silver', number_of_publications: 2, price: 525.0, duration_in_days: 365, order: 2)
+gold = Plan.create!(name: 'Gold', number_of_publications: 5, price: 1290.0, duration_in_days: 365, order: 3)
 
 Coupon.create!(code: 'BASIC50OFF', plan: basic, coupon_type: :discount_percentage, discount: 50.0)
 Coupon.create!(code: 'BASIC100', plan: basic, coupon_type: :discount_percentage, discount: 100.0)
