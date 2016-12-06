@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
   get '/ping', to: proc { [200, {}, ['Ok']] }
+  # [Let's encrypt] Acme challenge path to prove domain ownership
+  get "/.well-known/acme-challenge/#{ENV['ACME_CHALLENGE_PATH']}",
+    to: proc { [200, {}, [ENV['ACME_CHALLENGE']]] }
 
   devise_for :users, only: [:sessions, :password, :confirmations]
   devise_for :customers, controllers: {registrations: 'customers/registrations'}, only: [:registrations]
