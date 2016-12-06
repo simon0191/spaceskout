@@ -1,6 +1,6 @@
 =# required info
 .row
   - info.each do |k, v|
-    .col-xs-6= "#{k}:"
-    .col-xs-6= v
+    .col-xs-6= "#{k.to_s.html_safe}:"
+    .col-xs-6= v.to_s.html_safe
     .clearfix

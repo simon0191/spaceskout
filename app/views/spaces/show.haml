@@ -50,7 +50,7 @@
               'Classification': @space.classification.to_s.humanize,
               'Capacity': capacity_humanized(@space.capacity),
               'Website': @space.website || 'N/A',
-              'Location': "#{@space.full_address}, #{@space.city.name}, #{@space.city.state.name}"}
+              'Location': "#{@space.full_address} </br> #{@space.city.name}, #{@space.city.state.name}"}
           .col-md-6.col-xs-12
             = render 'shared/info_table', info: { 'Hourly Price': number_to_currency(@space.price_hourly, precision: 0),
               'Minimum # of Hours ': @space.minimum_number_of_hours,
