@@ -1,3 +1,5 @@
+$footer-height: 300px;
+
 @import "bootstrap-sprockets";
 @import "theme";
 @import "bootstrap";
@@ -32,7 +34,9 @@ html, body {
 .full-height-with-nav {
   height: calc(100% - #{$navbar-height});
 }
-
+.full-height-with-nav-and-footer {
+  min-height: calc(100% - #{$navbar-height} - #{$footer-height});
+}
 .full-width {
   width: 100%;
 }

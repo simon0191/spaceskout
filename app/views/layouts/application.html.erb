@@ -11,12 +11,10 @@
 <body data-controller="<%= params[:controller] %>" data-action="<%= params[:action] %>">
   <%= render 'shared/navigation' %>
   <%= render 'shared/alerts' %>
-  <div class="full-height-with-nav">
-    <div class="full-height-flex">
-      <%= yield %>
-    </div>
-    <%= render 'shared/footer' %>
+  <div class="full-height-with-nav-and-footer">
+    <%= yield %>
   </div>
+  <%= render 'shared/footer' %>
 
 
 </body>
