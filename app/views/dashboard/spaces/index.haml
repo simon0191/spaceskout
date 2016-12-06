@@ -46,4 +46,7 @@
                     = link_to 'Publish', dashboard_plans_path, class: 'btn btn-primary'
                 %td
                   = link_to 'Edit', edit_dashboard_space_path(space.id), class: 'btn btn-info'
+                - if current_user.has_access_level?(:admin)
+                  %td
+                    = link_to 'Delete', dashboard_space_path(space.id), method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure you want to Delete the Space #{space.name}"}
         = paginate @spaces

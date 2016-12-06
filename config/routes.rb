@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
   namespace :dashboard do
     get '/', to: redirect('/space_owners/edit'), as: :root
-    resources :spaces, only: [:index, :new, :create, :edit, :update] do
+    resources :spaces, only: [:index, :new, :create, :edit, :update, :destroy] do
       member do
         patch :publish
       end

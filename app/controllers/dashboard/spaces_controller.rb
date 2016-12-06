@@ -1,7 +1,8 @@
 class Dashboard::SpacesController < Dashboard::BaseController
   before_action :set_s3_direct_post, only: [:new, :edit, :create, :update]
   before_action :only_space_owners!
-  before_action :set_space, only: [:edit, :update, :publish]
+  before_action :only_admins!, only: [:destroy]
+  before_action :set_space, only: [:edit, :update, :publish, :destroy]
 
   def index
     if current_user.has_access_level?(:admin)
@@ -50,6 +51,12 @@ class Dashboard::SpacesController < Dashboard::BaseController
       flash[:error] = publish_form.errors.full_messages.join('\n')
       redirect_to dashboard_spaces_path
     end
+  end
+
+  def destroy
+    @space.destroy!
+    flash[:notice] = 'Space permanently deleted'
+    redirect_to dashboard_spaces_path
   end
 
   private
