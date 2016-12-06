@@ -43,6 +43,12 @@ Rails.application.routes.draw do
       end
     end
     resource :charity, only: [:edit, :update]
+    resources :coupons, only: [:index, :edit, :update, :new, :create] do
+      member do
+        patch :deactivate
+        patch :activate
+      end
+    end
   end
 
 end

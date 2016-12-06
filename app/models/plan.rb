@@ -10,6 +10,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  additional_info        :text
+#  order                  :integer
 #
 
 class Plan < ActiveRecord::Base

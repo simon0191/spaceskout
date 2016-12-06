@@ -9,6 +9,7 @@
 #  plan_id     :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  active      :boolean          default(TRUE)
 #
 
 class Coupon < ActiveRecord::Base
@@ -19,11 +20,12 @@ class Coupon < ActiveRecord::Base
 
   validates :coupon_type, presence: true
   validates :discount, presence: true, numericality: {greater_than: 0}
-  validates :code, presence: true
+  validates :code, presence: true, uniqueness: true
 
   after_initialize :assign_code, if: -> { new_record? && code.blank? }
 
   scope :for_all_plans, -> { where(plan_id: nil) }
+  scope :active, -> { where(active: true) }
 
   def valid_for_plan?(plan)
     plan_id.nil? || plan_id == plan.id

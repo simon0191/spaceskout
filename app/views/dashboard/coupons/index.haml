@@ -1,0 +1,43 @@
+= render 'dashboard/shared/navigation'
+.container
+  .row
+    .col-xs-12.col-md-6.col-md-offset-3
+      %h1 Coupons
+      = link_to 'Create', new_dashboard_coupon_path, class: 'btn btn-primary'
+      .table-responsive
+        %table.table.table-striped
+          %thead
+            %tr
+              %th Active
+              %th Code
+              %th Type
+              %th Discount
+              %th Plan
+          %tbody
+            - @coupons.order(:code).each do |c|
+              %tr
+                %td
+                  - if c.active?
+                    %span.glyphicon.glyphicon-ok.text-success
+                  - else
+                    %span.glyphicon.glyphicon-remove.text-danger
+
+                %td= c.code
+                %td= c.coupon_type.humanize
+                %td
+                  - if c.discount_percentage?
+                    #{c.discount.round(2)}%
+                  - else
+                    = number_to_currency c.discount
+                %td
+                  - if c.plan.present?
+                    = link_to(c.plan.name, edit_dashboard_plan_path(c.plan.id))
+                  - else
+                    All
+                %td
+                  = link_to 'Edit', edit_dashboard_coupon_path(c.id), class: 'btn btn-info'
+                %td
+                  - if c.active?
+                    = link_to 'Deactivate', deactivate_dashboard_coupon_path(c.id), method: :patch, class: 'btn btn-danger'
+                  - else
+                    = link_to 'Activate', activate_dashboard_coupon_path(c.id), method: :patch, class: 'btn btn-success'

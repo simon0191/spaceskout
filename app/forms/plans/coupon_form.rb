@@ -8,7 +8,7 @@ class Plans::CouponForm < BaseForm
 
     def validate_coupon_code
       if coupon_code.present?
-        coupon = Coupon.find_by_code(coupon_code)
+        coupon = Coupon.active.find_by_code(coupon_code)
         if coupon.nil?
           errors[:coupon_code] << 'not found'
         elsif !coupon.valid_for_plan?(plan)

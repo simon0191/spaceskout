@@ -24,3 +24,5 @@
               = link_to 'Featured Charity', edit_dashboard_charity_path
             %li{class: params[:controller] == 'dashboard/plans' ? 'active' : ''}
               = link_to 'Plans', dashboard_plans_path
+            %li{class: params[:controller] == 'dashboard/coupons' ? 'active' : ''}
+              = link_to 'Coupons', dashboard_coupons_path

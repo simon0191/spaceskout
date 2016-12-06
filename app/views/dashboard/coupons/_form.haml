@@ -1,0 +1,7 @@
+= simple_form_for [:dashboard, @coupon] do |f|
+  = f.input :code
+  = f.input :coupon_type, collection: Coupon.coupon_types.keys
+  = f.input :discount
+  = f.input :plan_id, collection: Plan.all
+  = f.input :active
+  = f.submit class: 'btn btn-success'

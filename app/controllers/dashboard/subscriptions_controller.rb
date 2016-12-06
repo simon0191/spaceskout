@@ -8,7 +8,7 @@ class Dashboard::SubscriptionsController < Dashboard::BaseController
     form = Subscriptions::ChargeAndCreateForm.new(
       user: current_user,
       plan: Plan.find(params[:plan_id]),
-      coupon: Coupon.find_by_code(params[:coupon_code]),
+      coupon: Coupon.active.find_by_code(params[:coupon_code]),
       stripe_token: params[:stripe_token]
     )
     if form.valid? && form.save!
