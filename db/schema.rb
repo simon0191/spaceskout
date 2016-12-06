@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206012326) do
+ActiveRecord::Schema.define(version: 20161206181632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,17 @@ ActiveRecord::Schema.define(version: 20161206012326) do
   end
 
   add_index "coupons", ["plan_id"], name: "index_coupons_on_plan_id", using: :btree
+
+  create_table "donations", force: :cascade do |t|
+    t.decimal  "amount",           precision: 15, scale: 2, default: 0.0
+    t.string   "charity_name"
+    t.string   "stripe_charge_id"
+    t.integer  "user_id"
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
+  end
+
+  add_index "donations", ["user_id"], name: "index_donations_on_user_id", using: :btree
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
     t.integer "unsubscriber_id"
@@ -259,6 +270,7 @@ ActiveRecord::Schema.define(version: 20161206012326) do
 
   add_foreign_key "cities", "states"
   add_foreign_key "coupons", "plans"
+  add_foreign_key "donations", "users"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"

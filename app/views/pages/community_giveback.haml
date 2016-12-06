@@ -35,9 +35,62 @@
         We are looking for non-profit organizations whose tireless work is impacting change. If you’re interested in becoming a featured charity, please email us at
         %a{:href => "mailto:info@spaceskout.com?Subject=", :target => "_top"} info@spaceskout.com
         with more information about your organization.
-=#  .row
-=#    .col-md-6.col-md-offset-3
-=#      %hr/
-=#      %p Support #{@charity.name}:
-=#      %small 100% of proceeds go directly to #{@charity.name}. All donations are tax deductible.
-=#      =# render partial: "donations/partials/form"
+      %hr/
+  .row
+    .col-md-6.col-md-offset-3.text-center.mb20
+      %h2 Support #{@charity.name}:
+      %p 100% of proceeds go directly to #{@charity.name}. All donations are tax deductible.
+
+      %form#donation-form.form-inline
+        .form-group
+          .input-group
+            .input-group-addon $
+            %input.amount.form-control{type: 'number', min: 0, placeholder: 'Amount'}
+        %input.btn.btn-primary{type: 'submit', value: 'Donate Now!', disabled: true}
+
+:javascript
+  $(document).ready(function() {
+    var $form = $('#donation-form');
+    var $submit = $form.find('input:submit');
+    var $amountInput = $form.find('input.amount');
+    $amountInput.on('input', function() {
+      if(parseFloat($amountInput.val()) > 0) {
+        $submit.prop('disabled', false);
+      } else {
+        $submit.prop('disabled', true);
+      }
+    });
+    $form.on('submit', function(event) {
+      event.preventDefault();
+
+      $submit.prop('disabled', true);
+
+      var handler = StripeCheckout.configure({
+        key: "#{ENV['STRIPE_PUBLIC_KEY']}",
+        image: "#{asset_url('logo-beta.png')}",
+        locale: 'auto',
+        name: 'SpaceSkout',
+        description: "Donation to #{@charity.name}",
+        amount: Math.floor(parseFloat($amountInput.val()) * 100),
+        token: function(token) {
+          $.ajax({
+            type: "POST",
+            url: "#{donations_path}",
+            data: {
+              amount: $amountInput.val(),
+              stripe_token: token.id
+            },
+            success: function() {
+              window.location = "#{community_giveback_pages_path}"
+            },
+            dataType: 'json'
+          });
+        },
+        closed: function() {
+          $submit.prop('disabled', false);
+        }
+      });
+      handler.open({});
+    });
+  });
+

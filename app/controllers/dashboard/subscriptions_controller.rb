@@ -18,10 +18,4 @@ class Dashboard::SubscriptionsController < Dashboard::BaseController
     end
   end
 
-  private
-
-    def create_subscription_params
-      params.permit(:stripe_token, :plan_id, :coupon_code)
-    end
-
 end
