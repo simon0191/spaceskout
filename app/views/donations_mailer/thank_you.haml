@@ -1,0 +1,12 @@
+- if @user
+  %p Hi #{@user.full_name},
+- else
+  %p Hi,
+
+%p
+  Thank you for your #{number_to_currency(@donation.amount, precision: 0)} donation to #{@donation.charity_name}! We are grateful for your generosity and support.
+  Your gift will make a priceless impact in the lives of our community members.
+
+%p With Gratitude,
+
+%p The SpaceSkout Team

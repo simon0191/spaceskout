@@ -9,6 +9,7 @@
 #  user_id          :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  donor_email      :string
 #
 
 class Donation < ActiveRecord::Base
@@ -17,6 +18,7 @@ class Donation < ActiveRecord::Base
   validates :amount, presence: true, numericality: {greater_than: 0}
   validates :charity_name, presence: true
   validates :stripe_charge_id, presence: true
+  validates :donor_email, presence: true
 
   def amount_in_cents
     (amount * 100.0).floor

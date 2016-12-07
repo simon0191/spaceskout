@@ -78,10 +78,14 @@
             url: "#{donations_path}",
             data: {
               amount: $amountInput.val(),
-              stripe_token: token.id
+              stripe_token: token.id,
+              donor_email: token.email
             },
             success: function() {
               window.location = "#{community_giveback_pages_path}"
+            },
+            error: function(error) {
+              console.log(error);
             },
             dataType: 'json'
           });
