@@ -31,12 +31,15 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         password_length: 8..128
 
   mount_uploader :avatar, SpaceOwners::AvatarUploader
 
   has_many :spaces
   has_many :subscriptions
+
+  validates :password, format: {with: /\A[\w]*\d[\w]*\Z/, message: 'must contain at least 1 number'}
 
   def has_access_level?(role)
     [:customer].include?(role.to_sym)
