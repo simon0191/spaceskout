@@ -17,6 +17,7 @@ class Subscriptions::ChargeAndCreateForm < BaseForm
     )
     if subscription.amount_paid <= 0
       subscription.save!
+      SubscriptionsMailer.purchase_confirmation(subscription).deliver_later
       true
     else
       response = Stripe::Charge.create(
