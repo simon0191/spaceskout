@@ -12,29 +12,19 @@
     $("#coupon-form-#{coupon_form.plan.id} .skip").on('click', function(event) {
       event.preventDefault();
       $(event.target).prop('disabled', true);
-      var handler = StripeCheckout.configure({
-        key: "#{ENV['STRIPE_PUBLIC_KEY']}",
-        image: "#{asset_url('logo-beta.png')}",
-        locale: 'auto',
-        name: 'SpaceSkout',
-        description: "Subscription to #{coupon_form.plan.name.capitalize} plan",
-        token: function(token) {
-          $.ajax({
-            type: "POST",
-            url: "#{dashboard_plan_subscriptions_path(coupon_form.plan.id)}",
-            data: {
-              stripe_token: token.id
-            },
-            success: function() {
-              window.location = "#{dashboard_spaces_path}"
-            },
-            dataType: 'json'
-          });
-        },
-        closed: function() {
-          $(event.target).prop('disabled', false);
+
+      var handler = subscriptionStripeHandler(
+        '#{coupon_form.plan.name}',
+        #{coupon_form.price_with_discount_in_cents},
+        '#{dashboard_plan_subscriptions_path(coupon_form.plan.id)}',
+        null,
+        '#{dashboard_spaces_path}',
+        {
+          closed: function() {
+            $(event.target).prop('disabled', false);
+          }
         }
-      });
+      )
       handler.open({});
     });
   });

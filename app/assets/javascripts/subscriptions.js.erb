@@ -1,0 +1,28 @@
+function subscriptionStripeHandler(planName, amountInCents, url, couponCode, successUrl, opts) {
+  var handler = StripeCheckout.configure($.extend({
+    key: '<%= ENV["STRIPE_PUBLIC_KEY"] %>',
+    image: '<%= asset_url("logo-beta.png") %>',
+    locale: 'auto',
+    name: 'SpaceSkout',
+    description: 'Subscription to ' + planName + ' plan',
+    amount: amountInCents,
+    token: function(token) {
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+          stripe_token: token.id,
+          coupon_code: couponCode
+        },
+        success: function() {
+          window.location = successUrl;
+        },
+        error: function() {
+          alert("The charge wasn's successful. Please try again");
+        },
+        dataType: 'json'
+      });
+    }
+  }, opts));
+  return handler;
+}

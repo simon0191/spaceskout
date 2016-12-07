@@ -1,25 +1,8 @@
-var handler = StripeCheckout.configure({
-  key: "<%= ENV['STRIPE_PUBLIC_KEY'] %>",
-  image: "<%= asset_url('logo-beta.png') %>",
-  locale: 'auto',
-  name: 'SpaceSkout',
-  description: "Subscription to <%= @coupon_form.plan.name.capitalize %> plan",
-  token: function(token) {
-    $.ajax({
-      type: "POST",
-      url: "<%= dashboard_plan_subscriptions_path(@coupon_form.plan.id) %>",
-      data: {
-        stripe_token: token.id,
-        coupon_code: '<%= @coupon_form.coupon_code %>'
-      },
-      success: function() {
-        window.location = "<%= dashboard_spaces_path %>"
-      },
-      error: function() {
-        alert("The charge wasn's successful. Please try again");
-      },
-      dataType: 'json'
-    });
-  }
-});
+var handler = subscriptionStripeHandler(
+  '<%= @coupon_form.plan.name%>',
+  <%= @coupon_form.price_with_discount_in_cents %>,
+  '<%= dashboard_plan_subscriptions_path(@coupon_form.plan.id) %>',
+  '<%= @coupon_form.coupon_code %>',
+  '<%= dashboard_spaces_path %>'
+)
 handler.open({});

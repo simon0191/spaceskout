@@ -38,6 +38,10 @@ class Subscription < ActiveRecord::Base
     end
   end
 
+  def self.calc_amount_to_pay_in_cents(plan, coupon)
+    (calc_amount_to_pay(plan, coupon) * 100).floor
+  end
+
   def amount_paid_in_cents
     (amount_paid * 100.0).floor
   end
