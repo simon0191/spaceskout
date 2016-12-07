@@ -8,6 +8,10 @@ class SpacePictures::ImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
+  def default_url(*args)
+    ActionController::Base.helpers.image_path('fallback/space_pictures/' + [version_name, 'default.png'].compact.join('_'))
+  end
+
   version :thumb do
     process resize_and_pad: [80, 80]
   end
