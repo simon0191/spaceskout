@@ -46,6 +46,7 @@ class Dashboard::SpacesController < Dashboard::BaseController
     publish_form = Spaces::PublishForm.new(user: @space.owner, space: @space)
     if publish_form.save!
       flash[:notice] = 'Space published'
+      SpacesMailer.space_published(@space).deliver_later
       redirect_to dashboard_spaces_path
     else
       flash[:error] = publish_form.errors.full_messages.join('\n')

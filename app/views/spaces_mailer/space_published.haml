@@ -1,0 +1,16 @@
+%p Hi #{@user.full_name},
+
+%p
+  Success - thanks for listing your #{@space.name} on SpaceSkout!
+  You can view your Space or make any edits to your listing by #{link_to 'logging into your account', new_user_session_url}.
+
+%p Now that you’ve taken the big leap forward, start advertising your Space by sharing the link below.
+
+%p
+  = link_to space_url(@space.id), space_url(@space.id)
+
+%p Let us know if we can help with anything. We’re excited to have you on board!
+
+%p Cheers,
+
+%p The SpaceSkout Team
