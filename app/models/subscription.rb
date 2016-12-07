@@ -46,4 +46,8 @@ class Subscription < ActiveRecord::Base
     valid_through > DateTime.now
   end
 
+  def donation_amount
+    amount_paid * 0.1
+  end
+
 end

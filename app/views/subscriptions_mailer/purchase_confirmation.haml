@@ -1,0 +1,11 @@
+%p Hi #{@user.full_name},
+
+%p Thanks for purchasing your annual SpaceSkout subscription! Your one year subscription expires on #{@subscription.valid_through.strftime('%m/%d/%Y')}.
+
+%p With your purchase, #{number_to_currency(@subscription.donation_amount, precision: 0)} of your contribution will benefit our charity partner.
+
+%p Take the next step and list your space.
+
+%p We look forward to getting you started!
+
+%p - The SpaceSkout Team

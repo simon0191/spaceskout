@@ -28,6 +28,7 @@ class Subscriptions::ChargeAndCreateForm < BaseForm
       if response.status == 'succeeded'
         subscription.stripe_charge_id = response.id
         subscription.save!
+        SubscriptionsMailer.purchase_confirmation(subscription).deliver_later
         true
       else
         errors[:charge] << "wasn't successful"
