@@ -56,4 +56,8 @@ module ApplicationHelper
       else           'panel-default'
     end
   end
+
+  def date_format
+    '%m/%d/%y'
+  end
 end

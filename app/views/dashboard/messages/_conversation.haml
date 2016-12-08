@@ -9,13 +9,13 @@
           %span
             &times;
       .modal-body{style: 'overflow: scroll;'}
-        - conversation.receipts_for(current_user).each do |receipt|
+        - conversation.receipts_for(current_user).order('created_at DESC').each do |receipt|
           - m = receipt.message
           .panel.panel-default{class: m.sender == current_user ? 'mr50' : 'ml50'}
             .panel-heading
               %p
                 %strong= m.sender.full_name
-                %small.pull-right= m.created_at
+                %small.pull-right= l(m.created_at, format: date_format)
             .panel-body
               = m.body
       .modal-footer
