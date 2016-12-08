@@ -11,6 +11,13 @@ modal.on('hidden.bs.modal', function() {
 $('body').append(modal);
 
 modal.modal('show');
+
+//Scroll to bottom
+modal.on('shown.bs.modal', function() {
+  var modalBody = modal.find('.modal-body');
+  modalBody.animate({ scrollTop: modalBody.prop('scrollHeight')}, 500);
+});
+
 //Mark conversation as read
 $("#conversation-<%= @conversation.id %>").removeClass('info')
 

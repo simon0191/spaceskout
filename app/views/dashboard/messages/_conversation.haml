@@ -9,7 +9,7 @@
           %span
             &times;
       .modal-body{style: 'overflow: scroll;'}
-        - conversation.receipts_for(current_user).order('created_at DESC').each do |receipt|
+        - conversation.receipts_for(current_user).order(:created_at).each do |receipt|
           - m = receipt.message
           .panel.panel-default{class: m.sender == current_user ? 'mr50' : 'ml50'}
             .panel-heading
