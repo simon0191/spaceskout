@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
   def create
     space = Space.published.find(message_params[:space_id])
     recipient = space.owner
-    current_user.send_message(recipient, message_params[:body], "#{current_user.full_name} wants to talk about the space #{space.name}")
+    current_user.send_message(recipient, message_params[:body], "#{current_user.full_name} wants to inquire about #{space.name}")
     redirect_to space_path(space.id), notice: 'Your message has been sent'
   end
 
