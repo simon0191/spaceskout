@@ -4,7 +4,7 @@
       .col-md-3
         %h4 Let's Socialize
 
-        %img{src: asset_url('icon-facebook.png'), href: 'https://www.facebook.com/spaceskout/'}/
+        = link_to image_tag('icon-facebook.png'), 'https://www.facebook.com/spaceskout/'
         %br/
         © 2016 |
         %a{:href => privacy_pages_path} Privacy Policy
@@ -21,8 +21,8 @@
             %a{:href => your_space_here_pages_path} Your Space Here
           %li
             %a{:href => our_story_pages_path} Our Story
-          %li
-            %a{:href => faqs_pages_path} FAQs
+          /%li
+          /  %a{:href => faqs_pages_path} FAQs
           %li
             %a{:href => community_giveback_pages_path} Community GiveBack
           %li
