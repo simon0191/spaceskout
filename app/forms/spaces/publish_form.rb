@@ -11,6 +11,8 @@ class Spaces::PublishForm < BaseForm
     subscription = user.subscriptions.not_expired.with_available_posts.order(:valid_through).take
     begin
       ActiveRecord::Base.transaction do
+        user.accepts_terms_of_service = true
+        user.save!
         subscription.available_publications -= 1
         subscription.save!
         space.subscription = subscription
@@ -32,7 +34,7 @@ class Spaces::PublishForm < BaseForm
     end
 
     def validate_user_has_available_posts
-      if user.available_posts <= 0
+      if user && user.available_posts <= 0
         errors[:user] << "doesn't have available posts"
       end
     end

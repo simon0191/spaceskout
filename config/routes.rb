@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       get :privacy
       get :faqs
       get :community_giveback
+      get :terms_of_service
     end
   end
 

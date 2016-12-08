@@ -40,6 +40,25 @@
                     .label.label-success
                       %span.glyphicon.glyphicon-ok
                       published
+                  - elsif current_user.available_posts > 0 && !current_user.accepts_terms_of_service?
+                    %button.btn.btn-primary{type: 'button', 'data-toggle': 'modal', 'data-target': "#accept-terms-and-publish-#{space.id}"}
+                      Publish
+                    .modal.fade{id: "accept-terms-and-publish-#{space.id}"}
+                      .modal-dialog
+                        .modal-content
+                          .modal-header
+                            %button.close{type: 'button', 'data-dismiss': 'modal'}
+                              %span
+                                &times;
+                            %h4 Publish Space #{space.name}
+                          .modal-body
+                            You must accept our
+                            = link_to 'Terms of Service', terms_of_service_pages_path, target: '_blank'
+                            before publishing your space.
+                          .modal-footer
+                            %button.btn.btn-default{type: 'button', 'data-dismiss': 'modal'} Cancel
+                            .pull-right.ml10
+                              = button_to 'Accept Terms of Service and Publish', publish_dashboard_space_path(space.id), method: :patch, class: 'btn btn-primary'
                   - elsif current_user.available_posts > 0
                     = button_to 'Publish', publish_dashboard_space_path(space.id), method: :patch, class: 'btn btn-primary'
                   - else
