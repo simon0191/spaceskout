@@ -155,6 +155,13 @@
       = f.text_area :special_note, class: 'form-control'
       = render 'shared/forms/error', resource: space, field: :special_note
 
+  .form-group.row{class: error_class(space, :document)}
+    .col-md-3.text-right-md
+      = f.label :document, 'Any Document'
+    .col-md-6
+      = f.file_field :document, class: 'form-control'
+      = render 'shared/forms/error', resource: space, field: :document
+
   .form-group.row{class: error_class(space, :website)}
     .col-md-3.text-right-md
       = f.label :website
@@ -198,16 +205,16 @@
     var form = $('.direct-upload');
 
     form.on('submit', function() {
-      $('input:file').prop('disabled', true);
+      $('input:file.direct-uploadable').prop('disabled', true);
     });
     form.on('fields_added.nested_form_fields',  function(event, param) {
-      $(event.target).find('input:file').each(function(i, elem) {
+      $(event.target).find('input:file.direct-uploadable').each(function(i, elem) {
         var fileInput = $(elem);
         setupUploader(fileInput);
       });
     });
 
-    form.find('input:file').each(function(i, elem) {
+    form.find('input:file.direct-uploadable').each(function(i, elem) {
       var fileInput = $(elem);
       setupUploader(fileInput);
     });

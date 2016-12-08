@@ -75,7 +75,8 @@ class Dashboard::SpacesController < Dashboard::BaseController
         # Location
         :city_id, :address1, :address2, :zip_code,
         # General info
-        :name, :classification, :phone_number, :capacity, :special_note, :description, :website, category_ids: [],
+        :name, :classification, :phone_number, :capacity, :special_note, :description, :website,
+        :document, category_ids: [],
         # Pictures
         space_pictures_attributes: [:temp_image_url, :temp_image_s3_key, :_destroy, :id]
       )

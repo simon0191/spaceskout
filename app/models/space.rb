@@ -46,13 +46,17 @@
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
 #  subscription_id            :integer
+#  document                   :string
 #
 
 class Space < ActiveRecord::Base
+  mount_uploader :document, Spaces::DocumentUploader
+
   belongs_to :city
   belongs_to :user
   alias_method :owner, :user
   belongs_to :subscription
+
   has_many :categories, through: :space_categories
   has_many :reviews, dependent: :destroy
   has_many :space_categories, dependent: :destroy

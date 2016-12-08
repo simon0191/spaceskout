@@ -86,6 +86,12 @@
           .col-xs-12
             %h3.text-primary Space
             = @space.description
+            - if @space.document?
+              .mt20.mb20
+                = link_to @space.document_url, class: 'btn btn-info', download: true do
+                  %span.glyphicon.glyphicon-cloud-download
+                  Additional info
+
           .col-xs-12
             %h3.text-primary Organization Description
             = @space.organization_description.present? ? @space.organization_description : 'N/A'
