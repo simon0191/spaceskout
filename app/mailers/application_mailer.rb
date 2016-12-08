@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "info@spaceskout.com"
+  default from: '"SpaceSkout" <info@spaceskout.com>'
   layout 'mailer'
 end
