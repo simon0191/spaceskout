@@ -34,7 +34,7 @@ module ApplicationHelper
   end
 
   def category_options
-    Category.active.map { |c| [c.name, c.id] }
+    Category.active.order(:id).active.map { |c| [c.name, c.id] }
   end
 
   def capacity_humanized(capacity)

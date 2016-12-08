@@ -36,7 +36,7 @@
             "data-slider-value": search_form.formatted_price_hourly_range || [0,1000]}
 
     = render(layout: 'filter_panel', locals: {name: 'Space Type'}) do
-      - Category.active.each do |category|
+      - Category.active.order(:id).each do |category|
         .checkbox
           %label
             %input{name: "categories[]", type: "checkbox", value: "#{category.id}",
