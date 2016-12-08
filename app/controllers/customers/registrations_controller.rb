@@ -20,7 +20,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
 
     def account_update_params
       params.require(:customer).permit(
-        :first_name, :last_name, :current_password, :password, :password_confirmation, :avatar, :avatar_cache
+        :first_name, :last_name, :current_password, :password, :password_confirmation, :avatar, :avatar_cache, :phone
       )
     end
 end

@@ -10,6 +10,11 @@
               Currently waiting confirmation for: #{resource.unconfirmed_email}
           %hr/
           = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, class: 'ss-form', multipart: true}) do |f|
+            .form-group{class: error_class(resource, :email)}
+              = f.label :email
+              = f.email_field :email, class: 'form-control', readonly: true
+              = render 'shared/forms/error', resource: resource, field: :email
+
             .form-group{class: error_class(resource, :business_name)}
               = f.label :business_name, class: 'required'
               = f.text_field :business_name, class: 'form-control'
