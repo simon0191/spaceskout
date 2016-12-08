@@ -88,7 +88,7 @@
             = @space.description
             - if @space.document?
               .mt20.mb20
-                = link_to @space.document_url, class: 'btn btn-info', download: true do
+                = link_to @space.document_url, class: 'btn btn-info', target: '_blank' do
                   %span.glyphicon.glyphicon-cloud-download
                   Additional info
 
