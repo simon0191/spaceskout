@@ -4,7 +4,7 @@ class ProcessSpacePictureJob < ActiveJob::Base
     limit: 3,
     delay: 1.minute,
     retryable_exceptions: [
-      ActiveRecord::RecordInvalid, # May be cause by a Net::ReadTimeout
+      ActiveRecord::RecordInvalid, # May be caused by a Net::ReadTimeout
       ActiveRecord::RecordNotFound
     ]
   )

@@ -186,7 +186,7 @@
             - if ff.object.try(:persisted?)
               = image_tag ff.object.image.thumb.url
             - else
-              = ff.file_field :temp_image_url, class: 'form-control'
+              = ff.file_field :temp_image_url, class: 'form-control direct-uploadable'
           .col-xs-1
             = ff.remove_nested_fields_link
       = f.add_nested_fields_link :space_pictures
