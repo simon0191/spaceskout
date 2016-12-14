@@ -67,7 +67,7 @@
 
       var handler = StripeCheckout.configure({
         key: "#{ENV['STRIPE_PUBLIC_KEY']}",
-        image: "#{asset_url('logo-beta.png')}",
+        image: "#{asset_url('logo-for-stripe.png')}",
         locale: 'auto',
         name: 'SpaceSkout',
         description: "Donation to #{@charity.name}",
