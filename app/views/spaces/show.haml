@@ -49,7 +49,7 @@
             = render 'shared/info_table', info: { 'Space Type': @space.categories.pluck(:name).join(', '),
               'Classification': @space.classification.to_s.humanize,
               'Capacity': capacity_humanized(@space.capacity),
-              'Website': @space.website || 'N/A',
+              'Website': link_to(@space.website_url, @space.website_url, target: '_blank') || 'N/A',
               'Location': "#{@space.full_address} </br> #{@space.city.name}, #{@space.city.state.name}"}
           .col-md-6.col-xs-12
             = render 'shared/info_table', info: { 'Hourly Price': number_to_currency(@space.price_hourly, precision: 0),

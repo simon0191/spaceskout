@@ -145,6 +145,16 @@ class Space < ActiveRecord::Base
     result
   end
 
+  def website_url
+    case website
+    when /\Ahttp(s?):\/\/.*\Z/
+      website
+    else
+      "http://#{website}"
+    end
+
+  end
+
   private
 
     def validate_at_least_1_amenities

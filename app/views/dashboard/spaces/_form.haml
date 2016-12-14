@@ -166,7 +166,9 @@
     .col-md-3.text-right-md
       = f.label :website
     .col-md-6
-      = f.text_field :website, class: 'form-control'
+      .input-group
+        .input-group-addon http://
+        = f.text_field :website, class: 'form-control'
       = render 'shared/forms/error', resource: space, field: :website
 
   .form-group.row{class: error_class(space, :description)}
