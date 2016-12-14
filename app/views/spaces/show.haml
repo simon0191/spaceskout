@@ -7,7 +7,7 @@
           = "(#{@space.city.name}, #{@space.city.state.name})"
 
       .carousel-container
-        = render 'shared/carousel', id: 'space-slider', images: @space.space_pictures.map{ |p| p.image.croped.url }
+        = render 'shared/carousel', id: 'space-slider', images: @space.space_pictures.order('"primary" DESC').map{ |p| p.image.croped.url }
   .row
     .col-xs-12.col-md-8.col-md-offset-2
       .space-detail.p20

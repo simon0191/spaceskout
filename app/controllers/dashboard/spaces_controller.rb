@@ -78,7 +78,7 @@ class Dashboard::SpacesController < Dashboard::BaseController
         :name, :classification, :phone_number, :capacity, :special_note, :description, :website,
         :document, :organization_description, category_ids: [],
         # Pictures
-        space_pictures_attributes: [:temp_image_url, :temp_image_s3_key, :_destroy, :id]
+        space_pictures_attributes: [:temp_image_url, :temp_image_s3_key, :primary, :_destroy, :id]
       )
     end
 

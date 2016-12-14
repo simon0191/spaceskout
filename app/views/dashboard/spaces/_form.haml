@@ -187,8 +187,11 @@
     .col-md-3.text-right-md
       = f.label :space_pictures, class: 'required'
     .col-md-9
+      Main image
       = f.nested_fields_for :space_pictures do |ff|
         .row
+          .col-xs-1
+            = ff.check_box :primary, class: 'main-image-checkbox'
           .col-xs-7
             - if ff.object.try(:persisted?)
               = image_tag ff.object.image.thumb.url
@@ -209,7 +212,17 @@
 
 :javascript
   $(document).ready(function() {
+
+
     var form = $('.direct-upload');
+
+    form.on('change', '.main-image-checkbox', function(event) {
+      var clicked = $(this);
+      if(clicked.prop('checked')) {
+        $('.main-image-checkbox').prop('checked', false);
+        clicked.prop('checked', true);
+      }
+    });
 
     form.on('submit', function() {
       $('input:file.direct-uploadable').prop('disabled', true);

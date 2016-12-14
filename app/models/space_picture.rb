@@ -18,10 +18,12 @@ class SpacePicture < ActiveRecord::Base
   belongs_to :space
   after_create :process_image
 
+  scope :main, -> { where(primary: true) }
 
   private
 
     def process_image
       ProcessSpacePictureJob.perform_later(self.id)
     end
+
 end

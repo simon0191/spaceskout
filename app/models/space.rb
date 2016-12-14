@@ -117,7 +117,7 @@ class Space < ActiveRecord::Base
   end
 
   def main_picture
-    space_pictures.first.try(:image)
+    space_pictures.main.first.try(:image) || space_pictures.first.try(:image)
   end
 
   def address
