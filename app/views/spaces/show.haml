@@ -118,7 +118,7 @@
                       = r.user.full_name
                       %img.img-responsive.rating{src: asset_url("rating-#{r.rating}.png")}
                     .col-xs-6.text-right.text-muted
-                      = l r.created_at, format: "%B %d"
+                      = l r.created_at.in_time_zone(current_time_zone), format: "%B %d"
                 .panel-body
                   = r.text
 

@@ -42,6 +42,11 @@ class User < ActiveRecord::Base
 
   validates :password, format: {with: /\A[\w]*\d[\w]*\Z/, message: 'must contain at least 1 number'}, if: -> { password.present? }
 
+  #TODO: Let users configure time zone
+  def time_zone
+    'Pacific Time (US & Canada)'
+  end
+
   def has_access_level?(role)
     [:customer].include?(role.to_sym)
   end

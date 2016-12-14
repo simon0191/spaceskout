@@ -5,6 +5,14 @@ class ApplicationController < ActionController::Base
   before_action :add_flash_messages_from_params
 
 
+  protected
+
+    helper_method :current_time_zone
+
+    def current_time_zone
+      current_user.try(:time_zone) || 'Pacific Time (US & Canada)'
+    end
+
   private
 
     def add_flash_messages_from_params
