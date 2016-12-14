@@ -67,7 +67,7 @@ class Dashboard::SpacesController < Dashboard::BaseController
         # Pricing
         :price_hourly, :price_daily, :price_buyout,
         # Amenities
-        :wifi, :audio_visual, :projector, :white_board, :table_chair, :parking, :phone_number, :kitchen, :catering,
+        :wifi, :audio_visual, :projector, :white_board, :table_chair, :parking, :phone, :kitchen, :catering,
         # Availability
         :weekdays_availability_from, :weekdays_availability_to, :weekend_availability_from, :weekend_availability_to, :minimum_number_of_hours,
         # Days
@@ -76,7 +76,7 @@ class Dashboard::SpacesController < Dashboard::BaseController
         :city_id, :address1, :address2, :zip_code,
         # General info
         :name, :classification, :phone_number, :capacity, :special_note, :description, :website,
-        :document, category_ids: [],
+        :document, :organization_description, category_ids: [],
         # Pictures
         space_pictures_attributes: [:temp_image_url, :temp_image_s3_key, :_destroy, :id]
       )

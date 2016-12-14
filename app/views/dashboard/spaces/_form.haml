@@ -51,7 +51,7 @@
     .col-md-3.text-right-md
       = f.label :city_id, 'City', class: 'required'
     .col-md-6
-      = f.select :city_id, grouped_options_for_select(city_options), {}, class: 'form-control'
+      = f.select :city_id, grouped_options_for_select(city_options, space.city_id), {include_blank: true}, class: 'form-control'
       = render 'shared/forms/error', resource: space, field: :city
 
   .form-group.row{class: error_class(space, :zip_code)}
@@ -175,6 +175,13 @@
     .col-md-6
       = f.text_area :description, class: 'form-control'
       = render 'shared/forms/error', resource: space, field: :description
+
+  .form-group.row{class: error_class(space, :organization_description)}
+    .col-md-3.text-right-md
+      = f.label :organization_description
+    .col-md-6
+      = f.text_area :organization_description, class: 'form-control'
+      = render 'shared/forms/error', resource: space, field: :organization_description
 
   .form-group.row{class: error_class(space, :space_pictures)}
     .col-md-3.text-right-md
