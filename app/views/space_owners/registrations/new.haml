@@ -38,7 +38,7 @@
               = render 'shared/forms/error', resource: resource, field: :password
 
             .form-group{class: error_class(resource, :avatar)}
-              = f.label :avatar, 'Business Logo', class: 'required'
+              = f.label :avatar, 'Business Logo'
               = image_tag(resource.avatar.thumb.url) if resource.avatar?
               = f.file_field :avatar, class: 'form-control'
               = f.hidden_field :avatar_cache

@@ -33,7 +33,6 @@ class SpaceOwner < User
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :phone, presence: true
-  validates :avatar, presence: true
 
   validate :validate_phone_10_digits
 
