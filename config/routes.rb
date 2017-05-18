@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
 
   get '/ping', to: proc { [200, {}, ['Ok']] }
@@ -11,6 +13,10 @@ Rails.application.routes.draw do
   devise_for :admins, controllers: {registrations: 'admins/registrations'}, only: [:registrations]
 
   root 'pages#home'
+
+  authenticate :user, lambda { |u| u.is_a? Admin } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   resources :pages, path: '/', only: [] do
     collection do
