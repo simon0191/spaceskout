@@ -18,6 +18,9 @@ class SpacePicture < ActiveRecord::Base
   belongs_to :space
   after_create :process_image
 
+  validates :temp_image_url, presence: true, on: :create
+  validates :temp_image_s3_key, presence: true, on: :create
+
   scope :main, -> { where(primary: true) }
 
   private

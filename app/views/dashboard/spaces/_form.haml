@@ -265,9 +265,6 @@
           submitButton.prop('disabled', true);
         },
         done: function(e, data) {
-          submitButton.prop('disabled', false);
-          progressBar.text('Uploading done');
-
           // extract key and generate URL from response
           var key = $(data.jqXHR.responseXML).find("Key").text();
           var fileUrl = 'http://#{URI.parse(@s3_direct_post.url).host}/' + key;
@@ -277,14 +274,17 @@
           var tempImageS3KeyInput = $('<input />', { type: 'hidden', name: fileInput.attr('name').replace(/temp_image_url/,'temp_image_s3_key'), value: key })
           fieldset.append(tempImageUrlInput);
           fieldset.append(tempImageS3KeyInput);
+
+          submitButton.prop('disabled', false);
+          progressBar.text('Uploading done');
         },
         fail: function(e, data) {
-          submitButton.prop('disabled', false);
-
           progressBar.
             removeClass('progress-success').
             addClass('progress-danger').
             text('Failed');
+
+          submitButton.prop('disabled', false);
         }
       });
     }

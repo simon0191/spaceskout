@@ -11,7 +11,7 @@ class ProcessSpacePictureJob < ActiveJob::Base
 
   queue_as :default
 
-  rescue_from(StandardError) { |error| logger.fatal }
+  rescue_from(StandardError) { |error| logger.fatal error }
 
   def perform(space_picture_id)
     logger.info "Processing space_picture-#{space_picture_id} START"
