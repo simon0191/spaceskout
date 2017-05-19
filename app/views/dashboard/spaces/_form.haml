@@ -212,9 +212,14 @@
     - else
       = f.submit 'UPDATE SPACE', class: 'btn btn-info'
 
-:javascript
-  $(document).ready(function() {
+%script(type="text/javascript")
+  - if space.errors
+    console.log('#{j(space.errors.to_json.html_safe)}')
 
+:javascript
+
+
+  $(document).ready(function() {
 
     var form = $('.direct-upload');
 

@@ -34,7 +34,7 @@ class SpaceOwner < User
   validates :last_name, presence: true
   validates :phone, presence: true
 
-  validate :validate_phone_10_digits
+  validate :validate_phone_number_10_or_11_digits
 
   def has_access_level?(role)
     [:customer, :space_owner].include?(role.to_sym)
@@ -42,9 +42,9 @@ class SpaceOwner < User
 
   private
 
-    def validate_phone_10_digits
-      if phone.present? && phone.gsub(/\D/,'').length != 10
-        errors[:phone] << 'should have 10 digits (includes area code)'
+    def validate_phone_number_10_or_11_digits
+      if phone.present? && phone.gsub(/\D/,'').length != 10 && phone.gsub(/\D/,'').length != 11
+        errors[:phone] << 'should have 10 or 11 digits (includes area code)'
       end
     end
 end
