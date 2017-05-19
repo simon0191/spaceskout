@@ -23,7 +23,7 @@
           }
         }
         .space-info {
-          height: 215px;
+          height: 170;
           padding: 10px;
           font-size: 12px;
           .rating {
@@ -34,6 +34,9 @@
             font-weight: bold;
             font-size: 18px;
             color: $brand-success;
+          }
+          .name {
+            font-size: 20px;
           }
         }
     }
