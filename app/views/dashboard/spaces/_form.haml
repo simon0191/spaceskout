@@ -77,15 +77,18 @@
 
   .form-group.row
     .col-md-3.text-right-md
-      = f.label :price, 'Price ($)', class: 'required'
+      = f.label :price, 'Price ($)'
     .col-md-3{class: error_class(space, :price_hourly)}
-      = f.number_field :price_hourly, class: 'form-control', step: 1, min: 0, placeholder: 'Hourly'
+      %div Hourly
+      = f.number_field :price_hourly, class: 'form-control', step: 1, min: 0, placeholder: 'N/A'
       = render 'shared/forms/error', resource: space, field: :price_hourly
     .col-md-3{class: error_class(space, :price_daily)}
-      = f.number_field :price_daily, class: 'form-control', step: 1, min: 0, placeholder: 'Daily'
+      %div Daily
+      = f.number_field :price_daily, class: 'form-control', step: 1, min: 0, placeholder: 'N/A'
       = render 'shared/forms/error', resource: space, field: :price_daily
     .col-md-3{class: error_class(space, :price_buyout)}
-      = f.number_field :price_buyout, class: 'form-control', step: 1, min: 0, placeholder: 'Buyout'
+      %div Buyout
+      = f.number_field :price_buyout, class: 'form-control', step: 1, min: 0, placeholder: 'N/A'
       = render 'shared/forms/error', resource: space, field: :price_buyout
 
   .form-group.row{class: error_class(space, :amenities)}
@@ -143,9 +146,9 @@
 
   .form-group.row{class: error_class(space, :minimum_number_of_hours)}
     .col-md-3.text-right-md
-      = f.label :minimum_number_of_hours, class: 'required'
+      = f.label :minimum_number_of_hours
     .col-md-3
-      = f.select :minimum_number_of_hours, (1..24), {prompt: 'Select minimum # of Hours'}, class: 'form-control'
+      = f.select :minimum_number_of_hours, (1..24), {include_blank: 'N/A'}, class: 'form-control'
       = render 'shared/forms/error', resource: space, field: :minimum_number_of_hours
 
   .form-group.row{class: error_class(space, :special_note)}
