@@ -13,13 +13,27 @@ class Dashboard::SpacesController < Dashboard::BaseController
   end
 
   def new
+    redirect_to dashboard_plans_path if current_user.available_posts <= 0
     @space = Space.new(space_pictures: 3.times.map{ SpacePicture.new })
   end
 
   def create
     @space = current_user.spaces.build(space_params)
     if @space.save
-      redirect_to dashboard_spaces_path, notice: 'Space has been created successfully'
+      if current_user.available_posts > 0
+        publish_form = Spaces::PublishForm.new(user: @space.owner, space: @space)
+        if publish_form.valid? && publish_form.save!
+          flash[:notice] = 'Space published'
+          SpacesMailer.space_published(@space).deliver_later
+          redirect_to dashboard_spaces_path
+        else
+          flash[:error] = publish_form.errors.full_messages.join('\n')
+          redirect_to dashboard_spaces_path
+        end
+      else
+        redirect_to dashboard_spaces_path, notice: 'Space has been created successfully'
+      end
+
     else
       if @space.space_pictures.length < 3
         3.times{ @space.space_pictures.build }

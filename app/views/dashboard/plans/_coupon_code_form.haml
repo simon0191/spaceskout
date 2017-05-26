@@ -18,7 +18,7 @@
         #{coupon_form.price_with_discount_in_cents},
         '#{dashboard_plan_subscriptions_path(coupon_form.plan.id)}',
         null,
-        '#{dashboard_spaces_path}',
+        '#{new_dashboard_space_path}',
         {
           closed: function() {
             $(event.target).prop('disabled', false);
