@@ -74,6 +74,9 @@ class Space < ActiveRecord::Base
   validates :zip_code, presence: true
   validates :phone_number, presence: true
   validates :capacity, presence: true
+  validates :price_hourly, presence: true
+  validates :price_daily, presence: true
+  validates :price_buyout, presence: true
   validates :description, presence: true
 
   validate :validate_at_leat_1_category

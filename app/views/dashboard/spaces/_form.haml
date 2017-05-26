@@ -77,18 +77,18 @@
 
   .form-group.row
     .col-md-3.text-right-md
-      = f.label :price, 'Price ($)'
+      = f.label :price, 'Price ($)', class: 'required'
     .col-md-3{class: error_class(space, :price_hourly)}
       %div Hourly
-      = f.number_field :price_hourly, class: 'form-control', step: 1, min: 0, placeholder: 'N/A'
+      = f.number_field :price_hourly, class: 'form-control', step: 1, min: 0
       = render 'shared/forms/error', resource: space, field: :price_hourly
     .col-md-3{class: error_class(space, :price_daily)}
       %div Daily
-      = f.number_field :price_daily, class: 'form-control', step: 1, min: 0, placeholder: 'N/A'
+      = f.number_field :price_daily, class: 'form-control', step: 1, min: 0
       = render 'shared/forms/error', resource: space, field: :price_daily
     .col-md-3{class: error_class(space, :price_buyout)}
       %div Buyout
-      = f.number_field :price_buyout, class: 'form-control', step: 1, min: 0, placeholder: 'N/A'
+      = f.number_field :price_buyout, class: 'form-control', step: 1, min: 0
       = render 'shared/forms/error', resource: space, field: :price_buyout
 
   .form-group.row{class: error_class(space, :amenities)}
