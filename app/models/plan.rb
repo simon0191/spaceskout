@@ -22,4 +22,8 @@ class Plan < ActiveRecord::Base
   validates :price, presence: true, numericality: {greater_than: 0.0}
   validates :duration_in_days, presence: true, numericality: {greater_than: 0}
   validates :order, presence: true
+
+  def self.basic
+    Plan.find_by_name('Basic')
+  end
 end

@@ -1,5 +1,19 @@
 class SpaceOwners::RegistrationsController < Devise::RegistrationsController
 
+  def create
+    super do |resource|
+      if resource.persisted?
+        plan = Plan.basic
+        subscription = resource.subscriptions.create(
+          plan: plan,
+          amount_paid: 0,
+          valid_through: DateTime.now + plan.duration_in_days.days,
+          available_publications: plan.number_of_publications
+        )
+      end
+    end
+  end
+
   def current_space_owner
     current_user if user_signed_in? && current_user.type == 'SpaceOwner'
   end
