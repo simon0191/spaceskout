@@ -28,7 +28,7 @@
 #  parking                    :boolean          default(FALSE)
 #  phone                      :boolean          default(FALSE)
 #  kitchen                    :boolean          default(FALSE)
-#  catering                   :boolean          default(FALSE)
+#  outside_catering_allowed   :boolean          default(FALSE)
 #  weekdays_availability_from :integer
 #  weekdays_availability_to   :integer
 #  weekend_availability_from  :integer
@@ -47,6 +47,7 @@
 #  updated_at                 :datetime         not null
 #  subscription_id            :integer
 #  document                   :string
+#  inhouse_catering           :boolean          default(FALSE)
 #
 
 class Space < ActiveRecord::Base
@@ -88,7 +89,7 @@ class Space < ActiveRecord::Base
   scope :published, -> { joins(:subscription).where('subscriptions.valid_through > ?', DateTime.now) }
 
   def self.amenities
-    @amenities ||= [:wifi, :audio_visual, :projector, :white_board, :table_chair, :parking, :phone, :kitchen, :catering]
+    @amenities ||= [:wifi, :audio_visual, :projector, :white_board, :table_chair, :parking, :phone, :kitchen, :outside_catering_allowed, :inhouse_catering]
   end
 
   def self.days

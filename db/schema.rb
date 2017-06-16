@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208173620) do
+ActiveRecord::Schema.define(version: 20170616220952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -194,7 +194,7 @@ ActiveRecord::Schema.define(version: 20161208173620) do
     t.boolean  "parking",                                             default: false
     t.boolean  "phone",                                               default: false
     t.boolean  "kitchen",                                             default: false
-    t.boolean  "catering",                                            default: false
+    t.boolean  "outside_catering_allowed",                            default: false
     t.integer  "weekdays_availability_from"
     t.integer  "weekdays_availability_to"
     t.integer  "weekend_availability_from"
@@ -213,6 +213,7 @@ ActiveRecord::Schema.define(version: 20161208173620) do
     t.datetime "updated_at",                                                          null: false
     t.integer  "subscription_id"
     t.string   "document"
+    t.boolean  "inhouse_catering",                                    default: false
   end
 
   add_index "spaces", ["city_id"], name: "index_spaces_on_city_id", using: :btree
