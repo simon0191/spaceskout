@@ -11,7 +11,7 @@
             .plan-box-content.full-height-flex
               %p.text-center
                 = pluralize(plan.number_of_publications, 'Posting')
-              %p.text-center
+              %p.text-center.plan-price
                 = number_to_currency(plan.price, precision: 0)
               .additional-info
                 = plan.additional_info.try(:html_safe)

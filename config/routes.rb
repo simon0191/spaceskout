@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       get :our_story
       get :contact_us
       get :privacy
-      get :faqs
+      # get :faqs
       get :community_giveback
       get :terms_of_service
     end
