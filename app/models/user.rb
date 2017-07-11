@@ -32,15 +32,12 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         password_length: 8..128
+         :recoverable, :rememberable, :trackable, :validatable
 
   mount_uploader :avatar, SpaceOwners::AvatarUploader
 
   has_many :spaces
   has_many :subscriptions
-
-  validates :password, format: {with: /\A[\w]*\d[\w]*\Z/, message: 'must contain at least 1 number'}, if: -> { password.present? }
 
   #TODO: Let users configure time zone
   def time_zone
